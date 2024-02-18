@@ -1,4 +1,4 @@
-.Food_food_container {
+.Faq_food_container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,7 +6,10 @@
     flex-direction: column;
 }
 
-.Food_information-text {
-    padding-bottom: 20px;
+.Faq_information-text {
+    padding: 25px;
     font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

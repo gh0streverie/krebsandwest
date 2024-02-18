@@ -54,21 +54,23 @@ const Location = () => {
                     Next
                 </Button>
             </div>
-            {currentSlide === 0 && 
-                <div>
-                    Kleivstua
-                </div>
-            }
-            {currentSlide === 1 && 
-                <div>
-                    Sundvollen
-                </div>
-            }
-            {currentSlide === 2 && 
-                <div>
-                    Oslo
-                </div>
-            }
+            <div className='Location_text_container'>
+                {currentSlide === 0 && 
+                    <div className='Location_information-text-lg'>
+                        Kleivstua
+                    </div>
+                }
+                {currentSlide === 1 && 
+                    <div className='Location_information-text-lg'>
+                        Sundvollen
+                    </div>
+                }
+                {currentSlide === 2 && 
+                    <div className='Location_information-text-lg'>
+                        Oslo
+                    </div>
+                }
+            </div>
         </div>
     );
 };

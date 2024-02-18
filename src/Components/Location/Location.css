@@ -8,3 +8,33 @@
     align-items: center;
     justify-content: center;
 }
+
+.Location_text_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px;
+    padding: 0 25px 25px 25px;
+    flex-direction: column;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #090248);
+    color: white;
+    border-radius: 10px;
+}
+
+.Location_information-text {
+    padding-top: 50px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.Location_information-text-lg {
+    padding-top: 20px;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

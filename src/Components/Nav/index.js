@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs, Tab, Box } from '@mui/material';
 import Home from '../Home';
-import Food from '../Food';
+import Faq from '../Faq';
 import Location from '../Location';
 
 import './Nav.css';
@@ -25,21 +25,21 @@ const Nav = () => {
                         indicatorColor="secondary"
                     >
                         <Tab label="Home" />
-                        <Tab label="Logistics" />
                         <Tab label="Location" />
-                        <Tab label="Food" />
+                        <Tab label="Logistics" />
+                        <Tab label="FAQ" />
                     </Tabs>
                     <TabPanel value={value} index={0}>
                         <Home />
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        Logistics
+                        <Location />    
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        <Location />
+                        Logistics
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        <Food />
+                        <Faq />
                     </TabPanel>
                 </Box>
             </div>

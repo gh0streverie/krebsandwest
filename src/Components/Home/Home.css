@@ -24,9 +24,19 @@
 }
 
 .Home_information-text {
+    padding-top: 50px;
+    font-size: 18px;
+    width: 55%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.Home_information-text-lg {
     padding-top: 20px;
-    font-size: 22px;
-    width: 50%;
+    font-size: 32px;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
