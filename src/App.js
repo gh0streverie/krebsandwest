@@ -5,7 +5,7 @@ import "./App.css";
 const App = () => {
 
   return (
-    <div className="App-layout">
+    <div className="App_container">
       <Nav />
     </div>
   );

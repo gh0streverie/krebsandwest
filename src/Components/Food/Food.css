@@ -1,0 +1,12 @@
+.Food_food_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    flex-direction: column;
+}
+
+.Food_information-text {
+    padding-bottom: 20px;
+    font-size: 22px;
+}

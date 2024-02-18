@@ -1,0 +1,10 @@
+.Location_container {
+    padding-top: 25px;
+}
+
+.Location_button_container {
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
