@@ -24,7 +24,7 @@
 }
 
 .Home_information-text {
-    padding-top: 50px;
+    padding-top: 20px;
     font-size: 18px;
     width: 55%;
     display: flex;
@@ -34,11 +34,17 @@
 }
 
 .Home_information-text-lg {
-    padding-top: 20px;
+    padding: 20px 0 20px 0;
     font-size: 32px;
     width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.Home_line_divider {
+    width: 50%; /* Set the width of the divider */
+    height: 1px; /* Set the height of the divider */
+    background: linear-gradient(to right, transparent, white, transparent); /* Adjust color stops as needed */
 }

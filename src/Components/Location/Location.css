@@ -38,3 +38,9 @@
     justify-content: center;
     text-align: center;
 }
+
+.Location_line_divider {
+    width: 50%; /* Set the width of the divider */
+    height: 1px; /* Set the height of the divider */
+    background: linear-gradient(to right, transparent, white, transparent); /* Adjust color stops as needed */
+}

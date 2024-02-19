@@ -48,26 +48,30 @@ const Location = () => {
             </div>
             <div className='Location_button_container'>
                 <Button color="info" onClick={handlePrevSlide}>
-                    Prev
+                    Previous
                 </Button>
                 <Button color="info" onClick={handleNextSlide}>
                     Next
                 </Button>
             </div>
             <div className='Location_text_container'>
+                <div className='Location_line_divider'/>
                 {currentSlide === 0 && 
                     <div className='Location_information-text-lg'>
                         Kleivstua
+                        <div className='Location_line_divider'/>
                     </div>
                 }
                 {currentSlide === 1 && 
                     <div className='Location_information-text-lg'>
                         Sundvollen
+                        <div className='Location_line_divider'/>
                     </div>
                 }
                 {currentSlide === 2 && 
                     <div className='Location_information-text-lg'>
                         Oslo
+                        <div className='Location_line_divider'/>
                     </div>
                 }
             </div>
