@@ -47,10 +47,10 @@ const Location = () => {
                 ))}
             </div>
             <div className='Location_button_container'>
-                <Button color="info" onClick={handlePrevSlide}>
+                <Button color="secondary" onClick={handlePrevSlide}>
                     Previous
                 </Button>
-                <Button color="info" onClick={handleNextSlide}>
+                <Button color="secondary" onClick={handleNextSlide}>
                     Next
                 </Button>
             </div>

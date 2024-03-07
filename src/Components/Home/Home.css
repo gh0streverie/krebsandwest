@@ -18,7 +18,6 @@
     margin: 25px;
     padding: 0 25px 25px 25px;
     flex-direction: column;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #090248);
     color: white;
     border-radius: 10px;
 }
@@ -26,25 +25,31 @@
 .Home_information-text {
     padding-top: 20px;
     font-size: 18px;
-    width: 55%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    text-shadow: 0 0 5px black;
 }
 
 .Home_information-text-lg {
     padding: 20px 0 20px 0;
     font-size: 32px;
-    width: 90%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    text-shadow: 0 0 5px black;
 }
 
 .Home_line_divider {
-    width: 50%; /* Set the width of the divider */
-    height: 1px; /* Set the height of the divider */
-    background: linear-gradient(to right, transparent, white, transparent); /* Adjust color stops as needed */
+    width: 50%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, white, transparent);
+}
+
+.MuiButton-contained {
+    color: black;
 }

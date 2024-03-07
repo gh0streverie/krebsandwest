@@ -5,6 +5,8 @@ import Faq from '../Faq';
 import Location from '../Location';
 
 import './Nav.css';
+import Rsvp from '../Rsvp';
+import HotelAndAccommodations from '../HotelAndAccommodations';
 
 const Nav = () => {
     const [value, setValue] = useState(0);
@@ -25,21 +27,29 @@ const Nav = () => {
                         indicatorColor="secondary"
                     >
                         <Tab label="Home" />
-                        <Tab label="Location" />
-                        <Tab label="Logistics" />
+                        <Tab label="Hotel and Accommodations" />
+                        <Tab label="Travel Information" />
                         <Tab label="FAQ" />
+                        <Tab label="Registry" />
+                        <Tab label="RSVP"/>
                     </Tabs>
                     <TabPanel value={value} index={0}>
-                        <Home />
+                        <Home handleChange={handleChange}/>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <Location />    
+                        <HotelAndAccommodations />
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        Logistics
+                        <Location />    
                     </TabPanel>
                     <TabPanel value={value} index={3}>
                         <Faq />
+                    </TabPanel>
+                    <TabPanel value={value} index={4}>
+                        Registry
+                    </TabPanel>
+                    <TabPanel value={value} index={5}>
+                        <Rsvp />
                     </TabPanel>
                 </Box>
             </div>

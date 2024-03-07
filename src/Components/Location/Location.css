@@ -16,7 +16,6 @@
     margin: 25px;
     padding: 0 25px 25px 25px;
     flex-direction: column;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #090248);
     color: white;
     border-radius: 10px;
 }
