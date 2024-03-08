@@ -17,15 +17,17 @@
     "react-dom": "^18.2.0",
     "react-email": "^2.1.0",
     "react-scripts": "5.0.1",
+    "serve": "^14.2.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start-dev": "react-scripts start",
-    "start": "react-scripts build && react-scripts start",
+    "start": "react-scripts build && npm run serve",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-server": "cd server && node server.js"
+    "start-server": "cd server && node server.js",
+    "serve": "serve -s build"
   },
   "eslintConfig": {
     "extends": [
