@@ -5,7 +5,7 @@ class EmailService {
   constructor() {}
 
   sendEmail(data) {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
     const {name, amount, message} = data;
 
     const msg = {

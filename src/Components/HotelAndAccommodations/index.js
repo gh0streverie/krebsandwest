@@ -27,7 +27,7 @@ const HotelAndAccommodations = () => {
                     Hotel and Room Information
                 </div>
                 <div className="Handa_line_divider"/>
-                <Box sx={{width: '100%'}}>
+                <Box sx={{width: '65%'}}>
                     <Tabs 
                         value={value} 
                         onChange={handleChange} 
