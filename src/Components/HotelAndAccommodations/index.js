@@ -24,7 +24,7 @@ const HotelAndAccommodations = () => {
             <div className="handa_information_container">
                 <img className="Handa_qrcode" src={qrcode} alt="qrcode" />
                 <div className="Handa_information_text-lg --bold">
-                    Hotel and Room Information
+                    Hotel and Accommodations
                 </div>
                 <div className="Handa_line_divider"/>
                 <Box sx={{width: '65%'}}>
@@ -52,7 +52,7 @@ const HotelAndAccommodations = () => {
                                     Accommodation from Friday to Saturday:
                                 </div>
                                 <div className="Handa_information_text">
-                                    1 person NOK 1,650 <br /> 2 pers. NOK 2,100 <br /> 3 pers. NOK 2,500 <br /> 4 pers. NOK 2,900 <br /> Suite NOK 3,100
+                                    1 person NOK 1,650 <br /> 2 pers. NOK 2,100 <br /> 3 pers. NOK 2,500 <br /> 4 pers. NOK 2,900
                                 </div>
                             </div>
                             <div className="Handa_info_container">
@@ -60,11 +60,11 @@ const HotelAndAccommodations = () => {
                                     Accommodation from Thursday to Saturday per night:
                                 </div>
                                 <div className="Handa_information_text">
-                                    1 person NOK 1,320 <br /> 2 pers. NOK 1,680 <br /> 3 pers. NOK 2,000 <br /> 4 pers. NOK 2,320 <br /> Suite NOK 2,600
+                                    1 person NOK 1,320 <br /> 2 pers. NOK 1,680 <br /> 3 pers. NOK 2,000 <br /> 4 pers. NOK 2,320
                                 </div>
                             </div>
                         </div>
-                        <div className="Handa_information_text">
+                        <div className="Handa_information_text" style={{textAlign: 'left'}}>
                             - Saturday no rooms are available
                             <br />
                             - Breakfast served each morning
@@ -77,17 +77,17 @@ const HotelAndAccommodations = () => {
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <div className="Handa_information_text">
-                            - Rooms available at Kleivstua for Thursday and Friday night
-                            <br />
-                            - Other accomodations available in the town as well            
-                        </div>
                         <div className="Handa_information_text --bold">
                             Sundvolden Hotel
                             <br />
                             Dronningveien 2, 3531 Krokkleiva, Norway
                             <br />
                             +47 32162100                
+                        </div>
+                        <div className="Handa_information_text" style={{textAlign: 'left'}}>
+                            - Rooms available at Kleivstua for Thursday and Friday night
+                            <br />
+                            - Other accomodations available in the town as well            
                         </div>
                     </TabPanel>
                 </Box>                

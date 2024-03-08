@@ -21,11 +21,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start-dev": "react-scripts start",
-    "start": "npm run serve",
-    "build": "react-scripts build",
+    "start-dev": "concurrently \"react-scripts start\" \"npm run start-server\"",
+    "start": "concurrently \"npm run serve\" \"npm run start-server\"",
+    "build": "concurrently \"react-scripts build\" \"npm run build-server\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "build-server": "cd server && npm i",
     "start-server": "cd server && node server.js",
     "serve": "serve -s build"
   },
@@ -46,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

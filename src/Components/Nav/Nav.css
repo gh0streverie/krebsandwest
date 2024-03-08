@@ -1,13 +1,13 @@
 .Nav_container {
     background: linear-gradient(to bottom, #090248, #cd3754);
+
+    & button {
+        color: white;
+    }
 }
 
 .Nav_sky {
     background-image: url('../../Assets/sky.png');
     background-size: 100vh;
     background-repeat: repeat-x;
-}
-
-.css-1a4cg4j-MuiButtonBase-root-MuiTab-root {
-    color: white !important;
 }
