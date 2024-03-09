@@ -28,10 +28,13 @@ const Rsvp = () => {
     
     const sendEmail = (e) => {
         e.preventDefault();
-        const domain = process.env.NODE_ENV ===  'development' ? 'http://localhost:5000' : 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
+        const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
         axios.post(`${domain}/api/sendemail`, formData, {
-            withCredentials: true
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }).then((response) => {
                 console.log('API response:', response.data);
                 setFormData({
