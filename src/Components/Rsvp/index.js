@@ -30,22 +30,38 @@ const Rsvp = () => {
         e.preventDefault();
         const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
-        axios.post(`${domain}/api/sendemail`, formData, {
-            withCredentials: true,
+        // axios.post(`${domain}/api/sendemail`, formData, {
+        //     withCredentials: true,
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // }).then((response) => {
+        //         console.log('API response:', response.data);
+        //         setFormData({
+        //             name: '',
+        //             amount: '',
+        //             message: ''
+        //         });
+        //     })
+        //     .catch((error) => {
+        //         console.error('There was a problem with the axios request:', error);
+        //     });
+
+        fetch('/api/sendemail', {
+            domain,
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then((response) => {
-                console.log('API response:', response.data);
-                setFormData({
-                    name: '',
-                    amount: '',
-                    message: ''
-                });
-            })
-            .catch((error) => {
-                console.error('There was a problem with the axios request:', error);
-            });
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
     };
 
     useEffect(() => {
