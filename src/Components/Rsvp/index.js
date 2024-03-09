@@ -1,14 +1,12 @@
-import React, {useEffect, useState} from "react";
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
 import InputAdornment from '@mui/material/InputAdornment';
-import {AccountCircle, AddReaction, Comment, Send, MoreVert} from '@mui/icons-material';
-import {TextField, Button } from '@mui/material';
+import { AccountCircle, AddReaction, Comment, Send, MoreVert } from '@mui/icons-material';
+import { Alert, Button, CircularProgress, Snackbar, TextField } from '@mui/material';
 import { Icon } from '@mui/material';
 
 import './Rsvp.css';
 
 const Rsvp = () => {
-
     const [formData, setFormData] = useState({
         name: '',
         amount: '',
@@ -16,7 +14,10 @@ const Rsvp = () => {
     });
 
     const [isFormValid, setIsFormValid] = useState(false);
-    
+    const [loading, setLoading] = useState(false);
+    const [open, setOpen] = React.useState(false);
+    const [success, setSuccess] = React.useState(null);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -25,43 +26,42 @@ const Rsvp = () => {
             [name]: value
         }));
     };
-    
+
+    const handleClose = (_, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+        setSuccess(null);
+    };
+
     const sendEmail = (e) => {
         e.preventDefault();
         const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
-
-        // axios.post(`${domain}/api/sendemail`, formData, {
-        //     withCredentials: true,
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }).then((response) => {
-        //         console.log('API response:', response.data);
-        //         setFormData({
-        //             name: '',
-        //             amount: '',
-        //             message: ''
-        //         });
-        //     })
-        //     .catch((error) => {
-        //         console.error('There was a problem with the axios request:', error);
-        //     });
+        setLoading(true);
 
         fetch('/api/sendemail', {
             domain,
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
-          })
-          .then(response => response.json())
-          .then(data => {
-            console.log(data);
-          })
-          .catch(error => {
-            console.error(error);
-          });
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setLoading(false);
+                setSuccess(true);
+                setOpen(true);
+            })
+            .catch(error => {
+                console.error(error);
+                setLoading(false);
+                setSuccess(false);
+                setOpen(true);
+            });
     };
 
     useEffect(() => {
@@ -79,7 +79,7 @@ const Rsvp = () => {
             <div className="Rsvp_header">
                 RSVP
             </div>
-            <div className="Rsvp_line_divider"/>
+            <div className="Rsvp_line_divider" />
             <div className="Rsvp_info">
                 Please respond with your ability to attend before the 1st of July
             </div>
@@ -147,19 +147,53 @@ const Rsvp = () => {
                     <MoreVert />
                 </Icon>
                 <div className="Rsvp_form_item">
-                    <Button 
-                        onClick={sendEmail} 
-                        color="secondary" 
-                        variant="contained" 
+                    <Button
+                        onClick={sendEmail}
+                        color="secondary"
+                        variant="contained"
                         disabled={!isFormValid}
                         size="large"
-                        endIcon={<Send />}
+                        endIcon={loading ? null : <Send />}
                     >
-                            RSVP
+                        {loading ? <CircularProgress color="inherit" /> : 'RSVP'}
                     </Button>
                 </div>
-                
-            </div>   
+                {open && success &&
+                    <Snackbar
+                        open={open}
+                        autoHideDuration={5000}
+                        onClose={handleClose}
+                        message="This Snackbar will be dismissed in 5 seconds."
+                    >
+                        <Alert
+                            onClose={handleClose}
+                            severity="success"
+                            variant="standard"
+                            sx={{ width: '100%' }}
+                        >
+                            Thank you for the RSVP!
+                        </Alert>
+                    </Snackbar>
+                }
+                {open && !success &&
+                    <Snackbar
+                        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                        open={open}
+                        autoHideDuration={5000}
+                        onClose={handleClose}
+                        message="This Snackbar will be dismissed in 5 seconds."
+                    >
+                        <Alert
+                            onClose={handleClose}
+                            severity="error"
+                            variant="standard"
+                            sx={{ width: '100%' }}
+                        >
+                            Sorry, something unexpected happened. Please try again.
+                        </Alert>
+                    </Snackbar>
+                }
+            </div>
         </div>
     );
 }
