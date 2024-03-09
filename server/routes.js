@@ -10,7 +10,7 @@ router.post('/sendemail', async (req, res) => {
     const data = req.body;
 
     try {
-        await emailService.sendEmail(data);
+        await EmailService.sendEmail(data);
         res.json({message: 'Success!'});
     } catch (e) {
         console.log(e);
