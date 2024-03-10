@@ -1,16 +1,34 @@
 import React, { useEffect, useState } from "react";
 import InputAdornment from '@mui/material/InputAdornment';
-import { AccountCircle, AddReaction, Comment, Send, MoreVert } from '@mui/icons-material';
-import { Alert, Button, CircularProgress, Snackbar, TextField } from '@mui/material';
+import { AccountCircle, Comment, MusicNote, Phone, Restaurant, Send, MoreVert } from '@mui/icons-material';
+import { Button, CircularProgress, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material';
 import { Icon } from '@mui/material';
 
 import './Rsvp.css';
+import SuccessIndicator from "../SuccessIndicator";
+
+const COMING = {
+    YES: 'yes',
+    NO: 'no'
+}
+
+const DAY_OPTIONS = {
+    NONE: 'none',
+    ONE: 'one',
+    TWO: 'two'
+}
 
 const Rsvp = () => {
     const [formData, setFormData] = useState({
         name: '',
+        phone: '',
+        diet: '',
         amount: '',
-        message: ''
+        message: '',
+        guests: [],
+        songs: '',
+        coming: COMING.YES,
+        days: DAY_OPTIONS.ONE
     });
 
     const [isFormValid, setIsFormValid] = useState(false);
@@ -26,6 +44,25 @@ const Rsvp = () => {
             [name]: value
         }));
     };
+
+    const handleAmountChange = (e) => {
+        const { name, value } = e.target;
+
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value,
+            guests: new Array(value).fill('')
+        }));
+    }
+    const handleGuestChange = (index, value) => {
+        const newValues = [...formData.guests];
+        newValues[index] = value;
+
+        setFormData(prevState => ({
+            ...prevState,
+            guests: newValues
+        }));
+    }
 
     const handleClose = (_, reason) => {
         if (reason === 'clickaway') {
@@ -65,14 +102,17 @@ const Rsvp = () => {
     };
 
     useEffect(() => {
-        const { name, amount } = formData;
-        if (name !== '' && amount !== '') {
+        const { name, amount, guests, phone, coming } = formData;
+        console.log(formData);
+        if (name !== '' && coming === COMING.NO) {
+            setIsFormValid(true)
+        } else if (name !== '' && amount !== '' && phone !== '' && guests.filter((val) => !val).length === 0) {
             setIsFormValid(true)
         } else {
             setIsFormValid(false);
         };
 
-    }, [formData.name, formData.amount])
+    }, [formData.name, formData.amount, formData.guests, formData.coming, formData.phone])
 
     return (
         <div className="Rsvp_container">
@@ -86,9 +126,10 @@ const Rsvp = () => {
             <div className="Rsvp_form_container">
                 <div className="Rsvp_form_item">
                     <TextField
+                        style={{paddingRight: '15px'}}
                         color="secondary"
                         fullWidth
-                        label="Name"
+                        label="Full Name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
@@ -101,39 +142,141 @@ const Rsvp = () => {
                             ),
                         }}
                     />
-                </div>
-                <Icon color="secondary">
-                    <MoreVert />
-                </Icon>
-                <div className="Rsvp_form_item">
                     <TextField
+                        style={{width: '40%'}}
                         color="secondary"
                         fullWidth
-                        label="Total guests attending"
-                        name="amount"
-                        value={formData.amount}
+                        label="Phone Number"
+                        name="phone"
+                        value={formData.phone}
                         onChange={handleChange}
                         required
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <AddReaction />
+                                    <Phone />
                                 </InputAdornment>
                             ),
                         }}
                     />
                 </div>
-                <Icon color="secondary">
-                    <MoreVert />
-                </Icon>
+                <div className="Rsvp_form_radio">
+                    <FormControl>
+                        <FormLabel id="coming-label">Will you be able to attend?</FormLabel>
+                        <RadioGroup
+                            aria-labelledby="coming-label"
+                            value={formData.coming}
+                            name="coming"
+                            onChange={handleChange}
+                        >
+                            <FormControlLabel value={COMING.YES} control={<Radio />} label="Yes, I will be attending" />
+                            <FormControlLabel value={COMING.NO} control={<Radio />} label="Unfortunately, I will not be able to attend" />
+                        </RadioGroup>
+                    </FormControl>
+                </div>
+                <div className="Rsvp_form_radio">
+                    <FormControl>
+                        <FormLabel id="days-label">What nights will you be staying?</FormLabel>
+                        <RadioGroup
+                            aria-labelledby="days-label"
+                            value={formData.days}
+                            name="days"
+                            onChange={handleChange}
+                        >
+                            <FormControlLabel value={DAY_OPTIONS.ONE} control={<Radio />} label="I will be staying Friday night" />
+                            <FormControlLabel value={DAY_OPTIONS.TWO} control={<Radio />} label="I will be staying Thursday and Friday night" />
+                            <FormControlLabel value={DAY_OPTIONS.NONE} control={<Radio />} label="I will not be staying at Kleivstua" />
+                        </RadioGroup>
+                    </FormControl>
+                </div>
+                <div className="Rsvp_form_item">
+                    <FormControl fullWidth>
+                        <InputLabel id="guests-label">Additional Guests</InputLabel>
+                        <Select
+                            labelId="guests-label"
+                            color="secondary"
+                            fullWidth
+                            label="Additional Guests"
+                            name="amount"
+                            value={formData.amount}
+                            onChange={handleAmountChange}
+                            required
+                        >
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+                { formData.guests.map((value, i) => {
+                    return (
+                        <div className="Rsvp_form_item" key={i}>
+                            <TextField
+                                color="secondary"
+                                fullWidth
+                                label={"Guest " + (i + 1)}
+                                name="guests"
+                                value={value}
+                                onChange={(e) => handleGuestChange(i, e.target.value)}
+                                required
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <AccountCircle />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                        </div>
+                    );
+                })}
                 <div className="Rsvp_form_item">
                     <TextField
                         color="secondary"
                         fullWidth
-                        label="Message"
+                        label="Song requests at reception"
+                        name="songs"
+                        value={formData.songs}
+                        onChange={handleChange}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <MusicNote />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                </div>
+                <div className="Rsvp_form_item">
+                    <TextField
+                        color="secondary"
+                        fullWidth
+                        label="Dietary requirements or food allergies"
+                        name="diet"
+                        value={formData.diet}
+                        onChange={handleChange}
+                        multiline
+                        rows={2}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Restaurant />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                </div>
+                <div className="Rsvp_form_item">
+                    <TextField
+                        color="secondary"
+                        fullWidth
+                        label="Questions, comments, or anything else we should know?"
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
+                        multiline
+                        rows={4}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -158,41 +301,7 @@ const Rsvp = () => {
                         {loading ? <CircularProgress color="inherit" /> : 'RSVP'}
                     </Button>
                 </div>
-                {open && success &&
-                    <Snackbar
-                        open={open}
-                        autoHideDuration={5000}
-                        onClose={handleClose}
-                        message="This Snackbar will be dismissed in 5 seconds."
-                    >
-                        <Alert
-                            onClose={handleClose}
-                            severity="success"
-                            variant="standard"
-                            sx={{ width: '100%' }}
-                        >
-                            Thank you for the RSVP!
-                        </Alert>
-                    </Snackbar>
-                }
-                {open && !success &&
-                    <Snackbar
-                        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                        open={open}
-                        autoHideDuration={5000}
-                        onClose={handleClose}
-                        message="This Snackbar will be dismissed in 5 seconds."
-                    >
-                        <Alert
-                            onClose={handleClose}
-                            severity="error"
-                            variant="standard"
-                            sx={{ width: '100%' }}
-                        >
-                            Sorry, something unexpected happened. Please try again.
-                        </Alert>
-                    </Snackbar>
-                }
+                <SuccessIndicator open={open} success={success} handleClose={handleClose}/>
             </div>
         </div>
     );

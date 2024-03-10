@@ -46,6 +46,15 @@
     align-items: center;
 }
 
+.Rsvp_form_radio {
+    margin: 15px 0 15px 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #757575;
+}
+
 .Rsvp_line_divider {
     width: 50%;
     height: 1px;
