@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from "react";
 import InputAdornment from '@mui/material/InputAdornment';
-import { AccountCircle, Comment, MusicNote, Phone, Restaurant, Send, MoreVert } from '@mui/icons-material';
+import { AccountCircle, Comment, Mail, MusicNote, Phone, Restaurant, Send, MoreVert } from '@mui/icons-material';
 import { Button, CircularProgress, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material';
 import { Icon } from '@mui/material';
-
-import './Rsvp.css';
+import {COMING, DAY_OPTIONS} from '../../Utils/Constants';
 import SuccessIndicator from "../SuccessIndicator";
 
-const COMING = {
-    YES: 'yes',
-    NO: 'no'
-}
-
-const DAY_OPTIONS = {
-    NONE: 'none',
-    ONE: 'one',
-    TWO: 'two'
-}
+import './Rsvp.css';
 
 const Rsvp = () => {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
+        email: '',
         diet: '',
         amount: '',
         message: '',
@@ -103,7 +94,7 @@ const Rsvp = () => {
 
     useEffect(() => {
         const { name, amount, guests, phone, coming } = formData;
-        console.log(formData);
+
         if (name !== '' && coming === COMING.NO) {
             setIsFormValid(true)
         } else if (name !== '' && amount !== '' && phone !== '' && guests.filter((val) => !val).length === 0) {
@@ -121,12 +112,11 @@ const Rsvp = () => {
             </div>
             <div className="Rsvp_line_divider" />
             <div className="Rsvp_info">
-                Please respond with your ability to attend before the 1st of July
+                Please respond with your ability to attend before the 1st of August
             </div>
             <div className="Rsvp_form_container">
                 <div className="Rsvp_form_item">
                     <TextField
-                        style={{paddingRight: '15px'}}
                         color="secondary"
                         fullWidth
                         label="Full Name"
@@ -142,8 +132,11 @@ const Rsvp = () => {
                             ),
                         }}
                     />
+                    
+                </div>
+                <div className="Rsvp_form_item">
                     <TextField
-                        style={{width: '40%'}}
+                        style={{width: '50%', paddingRight: '15px'}}
                         color="secondary"
                         fullWidth
                         label="Phone Number"
@@ -155,6 +148,23 @@ const Rsvp = () => {
                             startAdornment: (
                                 <InputAdornment position="start">
                                     <Phone />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    <TextField
+                        style={{width: '50%'}}
+                        color="secondary"
+                        fullWidth
+                        label="Email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Mail />
                                 </InputAdornment>
                             ),
                         }}
@@ -174,42 +184,46 @@ const Rsvp = () => {
                         </RadioGroup>
                     </FormControl>
                 </div>
-                <div className="Rsvp_form_radio">
-                    <FormControl>
-                        <FormLabel id="days-label">What nights will you be staying?</FormLabel>
-                        <RadioGroup
-                            aria-labelledby="days-label"
-                            value={formData.days}
-                            name="days"
-                            onChange={handleChange}
-                        >
-                            <FormControlLabel value={DAY_OPTIONS.ONE} control={<Radio />} label="I will be staying Friday night" />
-                            <FormControlLabel value={DAY_OPTIONS.TWO} control={<Radio />} label="I will be staying Thursday and Friday night" />
-                            <FormControlLabel value={DAY_OPTIONS.NONE} control={<Radio />} label="I will not be staying at Kleivstua" />
-                        </RadioGroup>
-                    </FormControl>
-                </div>
-                <div className="Rsvp_form_item">
-                    <FormControl fullWidth>
-                        <InputLabel id="guests-label">Additional Guests</InputLabel>
-                        <Select
-                            labelId="guests-label"
-                            color="secondary"
-                            fullWidth
-                            label="Additional Guests"
-                            name="amount"
-                            value={formData.amount}
-                            onChange={handleAmountChange}
-                            required
-                        >
-                            <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={3}>3</MenuItem>
-                            <MenuItem value={4}>4</MenuItem>
-                        </Select>
-                    </FormControl>
-                </div>
-                { formData.guests.map((value, i) => {
+                {formData.coming === COMING.YES && 
+                    <div className="Rsvp_form_radio">
+                        <FormControl>
+                            <FormLabel id="days-label">What nights will you be staying?</FormLabel>
+                            <RadioGroup
+                                aria-labelledby="days-label"
+                                value={formData.days}
+                                name="days"
+                                onChange={handleChange}
+                            >
+                                <FormControlLabel value={DAY_OPTIONS.ONE} control={<Radio />} label="I will be staying Friday night" />
+                                <FormControlLabel value={DAY_OPTIONS.TWO} control={<Radio />} label="I will be staying Thursday and Friday night" />
+                                <FormControlLabel value={DAY_OPTIONS.NONE} control={<Radio />} label="I will not be staying at Kleivstua" />
+                            </RadioGroup>
+                        </FormControl>
+                    </div>
+                }
+                {formData.coming === COMING.YES && 
+                    <div className="Rsvp_form_item">
+                        <FormControl fullWidth>
+                            <InputLabel id="guests-label">Additional Guests</InputLabel>
+                            <Select
+                                labelId="guests-label"
+                                color="secondary"
+                                fullWidth
+                                label="Additional Guests"
+                                name="amount"
+                                value={formData.amount}
+                                onChange={handleAmountChange}
+                                required
+                            >
+                                <MenuItem value={1}>1</MenuItem>
+                                <MenuItem value={2}>2</MenuItem>
+                                <MenuItem value={3}>3</MenuItem>
+                                <MenuItem value={4}>4</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                }
+                {formData.coming === COMING.YES && formData.guests.map((value, i) => {
                     return (
                         <div className="Rsvp_form_item" key={i}>
                             <TextField
@@ -231,42 +245,46 @@ const Rsvp = () => {
                         </div>
                     );
                 })}
-                <div className="Rsvp_form_item">
-                    <TextField
-                        color="secondary"
-                        fullWidth
-                        label="Song requests at reception"
-                        name="songs"
-                        value={formData.songs}
-                        onChange={handleChange}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <MusicNote />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </div>
-                <div className="Rsvp_form_item">
-                    <TextField
-                        color="secondary"
-                        fullWidth
-                        label="Dietary requirements or food allergies"
-                        name="diet"
-                        value={formData.diet}
-                        onChange={handleChange}
-                        multiline
-                        rows={2}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Restaurant />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </div>
+                {formData.coming === COMING.YES && 
+                    <div className="Rsvp_form_item">
+                        <TextField
+                            color="secondary"
+                            fullWidth
+                            label="Song requests at reception"
+                            name="songs"
+                            value={formData.songs}
+                            onChange={handleChange}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <MusicNote />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </div>
+                }
+                {formData.coming === COMING.YES && 
+                    <div className="Rsvp_form_item">
+                        <TextField
+                            color="secondary"
+                            fullWidth
+                            label="Dietary requirements or food allergies"
+                            name="diet"
+                            value={formData.diet}
+                            onChange={handleChange}
+                            multiline
+                            rows={2}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <Restaurant />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </div>
+                }   
                 <div className="Rsvp_form_item">
                     <TextField
                         color="secondary"
