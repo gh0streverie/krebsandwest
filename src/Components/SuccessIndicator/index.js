@@ -8,6 +8,7 @@ const SuccessIndicator = (props) => {
         <div>
             {open && success &&
             <Snackbar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                 open={open}
                 autoHideDuration={5000}
                 onClose={handleClose}
