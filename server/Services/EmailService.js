@@ -79,7 +79,7 @@ class EmailService {
     async sendEmail(data) {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
         const rsvpEmail = this.createRsvpEmail(data)
-        const confirmationEmail = createConfirmationEmail(data)
+        const confirmationEmail = this.createConfirmationEmail(data)
         await sgMail.send(rsvpEmail);
         return await sgMail.send(confirmationEmail);
     }

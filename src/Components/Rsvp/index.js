@@ -79,10 +79,14 @@ const Rsvp = () => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 setLoading(false);
-                setSuccess(true);
                 setOpen(true);
+
+                if ((data.message === 'Fail!')) {
+                    setSuccess(false);
+                } else {
+                    setSuccess(true);
+                }
             })
             .catch(error => {
                 console.error(error);
