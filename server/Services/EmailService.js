@@ -78,10 +78,7 @@ class EmailService {
 
     async sendEmail(data) {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
-        const rsvpEmail = this.createRsvpEmail(data)
-        const confirmationEmail = this.createConfirmationEmail(data)
-        await sgMail.send(rsvpEmail);
-        return await sgMail.send(confirmationEmail);
+        return await sgMail.send([this.createRsvpEmail(data), this.createConfirmationEmail(data)], true);
     }
 }
 
