@@ -69,7 +69,7 @@ class EmailService {
           html: `
               <div> 
                   <div>
-                      ${name}, thank you for the RSVP! We are looking forward to seeing you!
+                      ${name.split(' ')[0]}, thank you for the RSVP! We are looking forward to seeing you!
                   </div>
               </div>
           `,

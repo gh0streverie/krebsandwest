@@ -4,6 +4,7 @@ import kleivstua1 from '../../Assets/kleivstua1.webp';
 import kleivstua2 from '../../Assets/kleivstua2.jpg';
 import kleivstua3 from '../../Assets/kleivstua3.jpg';
 import qrcode from '../../Assets/qrcode.png';
+import Map from '../Map';
 
 import './HotelAndAccommodations.css';
 
@@ -75,6 +76,7 @@ const HotelAndAccommodations = () => {
                             <br />
                             - Room bookings will be done through heather once the RSVP is made, do not contact hotel about stays
                         </div>
+                        <Map lat={60.047031757553746} lng={10.321760046031777} />
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                         <div className="Handa_information_text --bold">
@@ -89,6 +91,7 @@ const HotelAndAccommodations = () => {
                             <br />
                             - Other accomodations available in the town as well            
                         </div>
+                        <Map lat={60.062831013909} lng={10.31067284639698} />
                     </TabPanel>
                 </Box>                
             </div>

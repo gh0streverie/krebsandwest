@@ -35,6 +35,9 @@ const Home = (props) => {
           >
               RSVP Here
           </Button>
+          <div className="Home_text_container">
+            Please respond with your ability to attend before the 1st of August
+          </div>
           {/* <div style={{height: '300px', width: '300px', backgroundColor: '#0d0d6f'}} />
           <div style={{height: '300px', width: '300px', backgroundColor: '#6f2589'}} />
           <div style={{height: '300px', width: '300px', backgroundColor: '#cd3754'}} /> */}
