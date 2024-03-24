@@ -4,6 +4,7 @@ import {Button} from '@mui/material';
 
 import './Home.css';
 import homeImage from '../../Assets/weddinghome.png';
+import fellowship from '../../Assets/fellowship.png';
 
 const Home = (props) => {
 
@@ -16,9 +17,7 @@ const Home = (props) => {
               <div className="Home_line_divider"/>
               <div className="Home_information-text-lg">
                 Welcome to the home page for the epic quest of Heather and Kristoffer's union
-                <br />
-                -
-                <br />
+                <img className="Home_image_fellowship" src={fellowship} alt="Example" />
                 Your handbook to get you there and back again
               </div>
               <div className="Home_information-text ">
@@ -27,7 +26,7 @@ const Home = (props) => {
               </div>
           </div>
           <Button 
-              onClick={() => handleChange(null, 5)} 
+              onClick={() => handleChange(null, 4)} 
               color="primary" 
               variant="contained" 
               size="large"
@@ -35,12 +34,12 @@ const Home = (props) => {
           >
               RSVP Here
           </Button>
-          <div className="Home_text_container">
+          <div className="Home_text_container" style={{background: 'unset'}}>
             Please respond with your ability to attend before the 1st of August
           </div>
-          {/* <div style={{height: '300px', width: '300px', backgroundColor: '#0d0d6f'}} />
-          <div style={{height: '300px', width: '300px', backgroundColor: '#6f2589'}} />
-          <div style={{height: '300px', width: '300px', backgroundColor: '#cd3754'}} /> */}
+          {/* <div style={{height: '33vh', width: '100vw', backgroundColor: '#0d0d6f'}} />
+          <div style={{height: '33vh', width: '100vw', backgroundColor: '#6f2589'}} />
+          <div style={{height: '33vh', width: '100vw', backgroundColor: '#cd3754'}} /> */}
       </div>
   );
 }

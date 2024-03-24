@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 25px;
+    padding: 100px 0;
 }
 
 .Handa_image {
@@ -52,6 +52,7 @@
     text-align: center;
     color: white;
     text-shadow: 0 0 5px black;
+    flex-direction: column;
 }
 
 .--bold {
@@ -83,4 +84,14 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-evenly;
+}
+
+.Handa_info_text {
+    margin: 10px 0;
+}
+
+.Handa_info_container_color {
+    margin: 15px 0;
+    background: linear-gradient(to bottom, #6f2589, #64227c);
+    border-radius: 5px;
 }

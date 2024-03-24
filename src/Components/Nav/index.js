@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Tabs, Tab, Box } from '@mui/material';
 import Home from '../Home';
-import Faq from '../Faq';
-import Location from '../Location';
+import Location from '../AdditionalInformation';
 
 import './Nav.css';
 import Rsvp from '../Rsvp';
 import HotelAndAccommodations from '../HotelAndAccommodations';
+import Registry from '../Registry';
 
 const Nav = () => {
     const [value, setValue] = useState(0);
@@ -25,11 +25,12 @@ const Nav = () => {
                         centered 
                         textColor="secondary"
                         indicatorColor="secondary"
+                        variant="fullWidth"
+                        style={{background: 'linear-gradient(rgb(4 4 49), rgb(3 3 73))', color: 'black', position: 'fixed', width: '100%', zIndex: '99'}}
                     >
                         <Tab label="Home" />
                         <Tab label="Hotel and Accommodations" />
-                        <Tab label="Travel Information" />
-                        <Tab label="FAQ" />
+                        <Tab label="Additional Information" />
                         <Tab label="Registry" />
                         <Tab label="RSVP"/>
                     </Tabs>
@@ -43,12 +44,9 @@ const Nav = () => {
                         <Location />    
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        <Faq />
+                        <Registry />
                     </TabPanel>
                     <TabPanel value={value} index={4}>
-                        Registry
-                    </TabPanel>
-                    <TabPanel value={value} index={5}>
                         <Rsvp />
                     </TabPanel>
                 </Box>

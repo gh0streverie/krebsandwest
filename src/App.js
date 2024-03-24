@@ -1,12 +1,12 @@
 import React from "react";
-import Nav from "./Components/Nav";
+import Router from './Components/SiteRouter';
 import "./App.css";
 
 const App = () => {
 
     return (
         <div className="App_container">
-            <Nav />
+            <Router />
         </div>
     );
 }

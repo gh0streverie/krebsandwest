@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 50px;
+    padding: 100px 0;
     flex-direction: column;
 }
 
@@ -20,11 +20,13 @@
     flex-direction: column;
     color: white;
     border-radius: 10px;
+    background: linear-gradient(to bottom, #6f2589, #64227c);
+    width: 100vw;
 }
 
 .Home_information-text {
     padding-top: 20px;
-    font-size: 18px;
+    font-size: 22px;
     width: 50%;
     display: flex;
     align-items: center;
@@ -35,13 +37,14 @@
 
 .Home_information-text-lg {
     padding: 20px 0 20px 0;
-    font-size: 32px;
+    font-size: 40px;
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     text-shadow: 0 0 5px black;
+    flex-direction: column;
 }
 
 .Home_line_divider {
@@ -52,4 +55,9 @@
 
 .MuiButton-contained {
     color: black;
+}
+
+.Home_image_fellowship {
+    height: 50px;
+    padding: 15px 0;
 }

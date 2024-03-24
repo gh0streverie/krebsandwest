@@ -40,56 +40,71 @@ const HotelAndAccommodations = () => {
                         <Tab label="Sundvollen" />
                     </Tabs>
                     <TabPanel value={value} index={0}>
-                        <div className="Handa_information_text --bold">
-                            Kleivstua
-                            <br />
-                            Dronningveien 500, 3531 Krokkleiva, Norway
-                            <br />
-                            +47 32161400                
-                        </div>
-                        <div className="Handa_stay_options_container">
-                            <div className="Handa_info_container">
-                                <div className="Handa_information_text --bold">
-                                    Accommodation from Friday to Saturday:
+                        <div className='Handa_info_container_color'>
+                            <div className="Handa_information_text --bold" >
+                                Kleivstua
+                                <br />
+                                Dronningveien 500, 3531 Krokkleiva, Norway
+                                <br />
+                                +47 32161400                
+                            </div>
+                            <div className="Handa_stay_options_container">
+                                <div className="Handa_info_container">
+                                    <div className="Handa_information_text --bold">
+                                        Accommodation from Friday to Saturday:
+                                    </div>
+                                    <div className="Handa_information_text">
+                                        1 person NOK 1,650 <br /> 2 pers. NOK 2,100 <br /> 3 pers. NOK 2,500 <br /> 4 pers. NOK 2,900
+                                    </div>
                                 </div>
-                                <div className="Handa_information_text">
-                                    1 person NOK 1,650 <br /> 2 pers. NOK 2,100 <br /> 3 pers. NOK 2,500 <br /> 4 pers. NOK 2,900
+                                <div className="Handa_info_container">
+                                    <div className="Handa_information_text --bold">
+                                        Accommodation from Thursday to Saturday per night:
+                                    </div>
+                                    <div className="Handa_information_text">
+                                        1 person NOK 1,320 <br /> 2 pers. NOK 1,680 <br /> 3 pers. NOK 2,000 <br /> 4 pers. NOK 2,320
+                                    </div>
                                 </div>
                             </div>
-                            <div className="Handa_info_container">
-                                <div className="Handa_information_text --bold">
-                                    Accommodation from Thursday to Saturday per night:
-                                </div>
-                                <div className="Handa_information_text">
-                                    1 person NOK 1,320 <br /> 2 pers. NOK 1,680 <br /> 3 pers. NOK 2,000 <br /> 4 pers. NOK 2,320
-                                </div>
+                        </div>  
+                        
+                        <div className="Handa_information_text" style={{alignItems: 'flex-start'}}>
+                            <div className='Handa_info_text' >
+                                - Saturday no rooms are available
                             </div>
-                        </div>
-                        <div className="Handa_information_text" style={{textAlign: 'left'}}>
-                            - Saturday no rooms are available
-                            <br />
-                            - Breakfast served each morning
-                            <br />
-                            - Baguette lunch included for all who stay thursday night
-                            <br />
-                            - Check in at 15:00, and check out 11:00
-                            <br />
-                            - Room bookings will be done through heather once the RSVP is made, do not contact hotel about stays
+                            <div className='Handa_info_text'>
+                                - Breakfast served each morning
+                            </div>
+                            <div className='Handa_info_text'>
+                                - Baguette lunch included for all who stay thursday night
+                            </div>
+                            <div className='Handa_info_text'>
+                                - Check in at 15:00, and check out 11:00
+                            </div>
+                            <div className='Handa_info_text'>
+                                - Room bookings will be done through heather once the RSVP is made, do not contact hotel about stays
+                            </div>
                         </div>
                         <Map lat={60.047031757553746} lng={10.321760046031777} />
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <div className="Handa_information_text --bold">
-                            Sundvolden Hotel
-                            <br />
-                            Dronningveien 2, 3531 Krokkleiva, Norway
-                            <br />
-                            +47 32162100                
+                        <div className='Handa_info_container_color'>
+                            <div className="Handa_information_text --bold" style={{paddingBottom: '20px'}}>
+                                Sundvolden Hotel
+                                <br />
+                                Dronningveien 2, 3531 Krokkleiva, Norway
+                                <br />
+                                +47 32162100                
+                            </div>
                         </div>
-                        <div className="Handa_information_text" style={{textAlign: 'left'}}>
-                            - Rooms available at Kleivstua for Thursday and Friday night
+                        <div className="Handa_information_text" style={{alignItems: 'flex-start'}}>
+                            <div className='Handa_info_text' >
+                                - Rooms available at Kleivstua for Thursday and Friday night
+                            </div>
+                            <div className='Handa_info_text' >
+                                - Other accomodations available in the town as well            
+                            </div>
                             <br />
-                            - Other accomodations available in the town as well            
                         </div>
                         <Map lat={60.062831013909} lng={10.31067284639698} />
                     </TabPanel>

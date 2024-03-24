@@ -1,0 +1,47 @@
+.Registry_container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-direction: column;
+    
+    & .Registry_message_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100vw;
+        padding: 100px 0;
+        background: linear-gradient(to bottom, #6f2589, #64227c);
+
+        & .Registry_header {
+            font-size: 64px;
+            font-weight: bold;
+        }
+    
+        & .Registry_body {
+            padding-top: 25px;
+            font-size: 22px;
+            text-align: center;
+        }
+    
+        & .Registry_line_divider {
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, white, transparent);
+            transform: translateY(12px);
+        }
+
+        & .Registry_image_gift {
+            height: 150px;
+        }
+
+        & .Registry_image_travel {
+            height: 100px;
+            padding-top: 25px;
+            transform: translateX(7px);
+        }
+    }
+}

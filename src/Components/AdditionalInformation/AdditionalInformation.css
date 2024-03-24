@@ -1,5 +1,5 @@
 .Location_container {
-    padding-top: 25px;
+    padding: 100px 0;
 }
 
 .Location_button_container {
@@ -7,39 +7,62 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
 }
 
 .Location_text_container {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 25px;
     padding: 0 25px 25px 25px;
     flex-direction: column;
     color: white;
     border-radius: 10px;
+    z-index: 0;
 }
 
 .Location_information-text {
     padding-top: 50px;
-    font-size: 18px;
+    font-size: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    flex-direction: column;
 }
 
 .Location_information-text-lg {
     padding-top: 20px;
-    font-size: 32px;
+    font-size: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    flex-direction: column;
 }
 
 .Location_line_divider {
-    width: 50%; /* Set the width of the divider */
-    height: 1px; /* Set the height of the divider */
-    background: linear-gradient(to right, transparent, white, transparent); /* Adjust color stops as needed */
+    width: 50%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, white, transparent);
+}
+
+.Location_info_text {
+    margin: 10px 0;
+}
+
+.Location_questions_form {
+    width: 100%;
+}
+
+.Location_questions_form_container {
+    margin-top: 10px;
+    width: 97%;
+    padding: 20px;
+    background-color: white;
+    color: black;
+    border-radius: 3px;
+}
+
+.Registry_image_info {
+    height: 125px;
+    transform: translateY(-20px);
 }
