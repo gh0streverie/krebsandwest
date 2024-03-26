@@ -2,7 +2,7 @@ import React from "react";
 import { Alert, Snackbar } from '@mui/material';
 
 const SuccessIndicator = (props) => {
-    const {open, success, handleClose} = props;
+    const {open, success, handleClose, indicatorMessage} = props;
     
     return (
         <div>
@@ -20,7 +20,7 @@ const SuccessIndicator = (props) => {
                     variant="standard"
                     sx={{ width: '100%' }}
                 >
-                    Thank you for the RSVP!
+                    {indicatorMessage}
                 </Alert>
             </Snackbar>
         }

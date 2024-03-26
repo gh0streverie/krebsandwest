@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { Button, CircularProgress, TextField, InputAdornment, Icon } from '@mui/material';
-import { AccountCircle, Comment, Mail, Phone, MoreVert, Send } from '@mui/icons-material';
+import { Button, CircularProgress, TextField, InputAdornment } from '@mui/material';
+import { AccountCircle, Comment, Mail, Phone, Send } from '@mui/icons-material';
 import SuccessIndicator from "../SuccessIndicator";
 
 import './Questions.css';
@@ -167,7 +167,7 @@ const Questions = (props) => {
                         {loading ? <CircularProgress color="inherit" /> : 'Send Question'}
                     </Button>
                 </div>
-                <SuccessIndicator open={open} success={success} handleClose={handleClose}/>
+                <SuccessIndicator open={open} success={success} handleClose={handleClose} indicatorMessage={'Thank you for the question!'}/>
             </div>
         </div>
     );

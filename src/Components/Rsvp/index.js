@@ -322,7 +322,7 @@ const Rsvp = () => {
                         {loading ? <CircularProgress color="inherit" /> : 'RSVP'}
                     </Button>
                 </div>
-                <SuccessIndicator open={open} success={success} handleClose={handleClose}/>
+                <SuccessIndicator open={open} success={success} handleClose={handleClose} indicatorMessage={'Thank you for the RSVP!'}/>
             </div>
         </div>
     );

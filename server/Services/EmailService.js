@@ -67,7 +67,7 @@ class EmailService {
             html =  `
                 <div> 
                     <div>
-                        ${name.split(' ')[0]}, thank you for the RSVP! We are looking forward to seeing you!
+                        ${name}, thank you for the RSVP! We are looking forward to seeing you!
                     </div>
                 </div>
             `;
@@ -75,7 +75,7 @@ class EmailService {
             html =  `
                 <div> 
                     <div>
-                        ${name.split(' ')[0]}, we are sorry to hear that you will be unable to make it, but thank you for letting us know!
+                        ${name}, we are sorry to hear that you will be unable to make it, but thank you for letting us know!
                     </div>
                 </div>
             `;
@@ -101,7 +101,7 @@ class EmailService {
             html: `
               <div> 
                   <div>
-                      ${name.split(' ')[0]} sent this question:
+                      ${name} sent this question:
                   </div>
                   <div>
                       ${message}:
@@ -124,7 +124,7 @@ class EmailService {
 
     async sendQuestion(data) {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
-        return await sgMail.send(this.createRsvpEmail(data));
+        return await sgMail.send(this.createQuestionEmail(data));
     }
 }
 
