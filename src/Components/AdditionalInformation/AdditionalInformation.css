@@ -40,7 +40,7 @@
 }
 
 .Location_line_divider {
-    width: 50%;
+    width: 70%;
     height: 1px;
     background: linear-gradient(to right, transparent, white, transparent);
 }
@@ -49,20 +49,15 @@
     margin: 10px 0;
 }
 
-.Location_questions_form {
-    width: 100%;
+.Location_image_info {
+    height: 100px;
+    margin-top: 20px;
+    transform: translateY(-10px);
 }
 
-.Location_questions_form_container {
-    margin-top: 10px;
-    width: 97%;
-    padding: 20px;
-    background-color: white;
-    color: black;
-    border-radius: 3px;
-}
-
-.Registry_image_info {
-    height: 125px;
-    transform: translateY(-20px);
+.Location_questions_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65%;
 }

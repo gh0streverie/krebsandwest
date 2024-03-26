@@ -1,0 +1,20 @@
+.Questions_form_container {
+    margin-top: 10px;
+    width: 100%;
+    padding: 25px;
+    background-color: white;
+    color: black;
+    border-radius: 15px;
+}
+
+.Questions_form {
+    width: 100%;
+}
+
+.Questions_form_item {
+    margin: 15px 0 15px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -25,6 +25,7 @@ const Home = (props) => {
                 Adventure awaits as we embark on this quest for eternal love. Grab your potions and join us on this nerdy journey!
               </div>
           </div>
+          <div className="Home_line_divider" style={{transform: 'translatey(-27px)'}}/>
           <Button 
               onClick={() => handleChange(null, 4)} 
               color="primary" 

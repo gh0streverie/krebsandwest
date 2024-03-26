@@ -1,10 +1,11 @@
 .Rsvp_container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 50px 0;
     flex-direction: column;
     color: white;
+    min-height: 92.3vh;
 }
 
 .Rsvp_form_container {

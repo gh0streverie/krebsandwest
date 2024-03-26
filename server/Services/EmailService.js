@@ -1,18 +1,18 @@
 const sgMail = require('@sendgrid/mail');
-const {FROM_EMAIL} = require('../Utils/Constants');
+const { FROM_EMAIL, COMING } = require('../Utils/Constants');
 
 class EmailService {
-  constructor() {}
+    constructor() { }
 
-  createRsvpEmail(data) {
-      const {name, phone, email, diet, amount, message, guests, songs, coming, days} = data;
+    createRsvpEmail(data) {
+        const { name, phone, email, diet, amount, message, guests, songs, coming, days } = data;
 
-      return {
-          to: 'kristoffer.c.west@gmail.com',
-          from: FROM_EMAIL,
-          subject: 'Wedding RSVP Received!',
-          text: 'RSVP',
-          html: `
+        return {
+            to: 'kristoffer.c.west@gmail.com',
+            from: FROM_EMAIL,
+            subject: 'Wedding RSVP Received!',
+            text: 'RSVP',
+            html: `
               <div> 
                   <div>
                       ${name}
@@ -55,30 +55,76 @@ class EmailService {
                   </div>
               </div>
           `,
-      }
-  }
+        }
+    }
 
-  createConfirmationEmail(data) {
-      const {name, phone, email, diet, amount, message, guests, songs, coming, days} = data;
+    createConfirmationEmail(data) {
+        const { name, email, coming } = data;
 
-      return {
-          to: email,
-          from: FROM_EMAIL,
-          subject: 'Wedding RSVP Confirmation!',
-          text: 'RSVP',
-          html: `
+        let html = '';
+
+        if (coming === COMING.YES) {
+            html =  `
+                <div> 
+                    <div>
+                        ${name.split(' ')[0]}, thank you for the RSVP! We are looking forward to seeing you!
+                    </div>
+                </div>
+            `;
+        } else {
+            html =  `
+                <div> 
+                    <div>
+                        ${name.split(' ')[0]}, we are sorry to hear that you will be unable to make it, but thank you for letting us know!
+                    </div>
+                </div>
+            `;
+        }
+
+        return {
+            to: email,
+            from: FROM_EMAIL,
+            subject: 'Wedding RSVP Received!',
+            text: 'RSVP',
+            html
+        }
+    }
+
+    createQuestionEmail(data) {
+        const { name, phone, email, message } = data;
+
+        return {
+            to: 'kristoffer.c.west@gmail.com',
+            from: FROM_EMAIL,
+            subject: `Wedding Question From ${name}`,
+            text: 'Question',
+            html: `
               <div> 
                   <div>
-                      ${name.split(' ')[0]}, thank you for the RSVP! We are looking forward to seeing you!
+                      ${name.split(' ')[0]} sent this question:
+                  </div>
+                  <div>
+                      ${message}:
+                  </div>
+                  <div>
+                       ${email ? `Email address: ${email}` : 'No email provided'}
+                  </div>
+                  <div>
+                       ${phone ? `Phone Number: ${phone}` : 'No phone number Provided'}
                   </div>
               </div>
           `,
-      }
-  }
+        }
+    }
 
     async sendEmail(data) {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
         return await sgMail.send([this.createRsvpEmail(data), this.createConfirmationEmail(data)], true);
+    }
+
+    async sendQuestion(data) {
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
+        return await sgMail.send(this.createRsvpEmail(data));
     }
 }
 

@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
-import { Paper, Button, TextField, InputAdornment } from '@mui/material';
-import { AccountCircle, ArrowBackIos, ArrowForwardIos, Comment, Mail, Phone } from '@mui/icons-material';
+import { Paper, Button } from '@mui/material';
+import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import Map from '../Map';
 import info from '../../Assets/info.png';
 
 import './AdditionalInformation.css';
+import Questions from '../Questions';
 
 const AdditionalInformation = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [formData, setFormData] = useState({
-        name: '',
-        phone: '',
-        email: '',
-        message: ''
-    });
 
     const images = [
         'https://a.travel-assets.com/findyours-php/viewfinder/images/res70/227000/227911-Honefoss.jpg',
@@ -27,15 +22,6 @@ const AdditionalInformation = () => {
 
     const handlePrevSlide = () => {
         setCurrentSlide((prevSlide) => (prevSlide === 0 ? images.length - 1 : prevSlide - 1));
-    };
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
     };
 
     return (
@@ -73,25 +59,27 @@ const AdditionalInformation = () => {
                 </Button>
             </div>
             <div className='Location_text_container'>
-                <div className='Location_information-text' style={{ borderRadius: '3px',  background: 'linear-gradient(to bottom, #6f2589, #64227c)', width: '97vw', marginTop: '50px'}}>
-                    <img className="Registry_image_info" src={info} alt="info" />
-                    <div className='Location_info_text'>
-                        - There is free parking and electric car chargers at the hotel
-                    </div>
-                    <div className='Location_info_text'>
-                        - The road up to the hotel is a toll road. If you are staying overnight, you do not need to pay this toll
-                    </div>
-                    <div className='Location_info_text'>
-                        - Hønefoss is the closest town to Kleivstua that the train goes to. From here is about a 30 minute drive. 
-                    </div>
-                    <div className='Location_info_text'>
-                        - Vy is the company that runs trains and other public transportation throughout Norway. 
+                <div className="Location_line_divider" style={{transform: 'translateY(50px)'}}/>
+                <div className='Location_information-text' style={{ borderRadius: '5px', padding: '20px',  background: 'linear-gradient(to bottom, #6f2589, #64227c)', width: '65%', marginTop: '50px', transform: 'translateY(0px)'}}>
+                    <img className="Location_image_info" src={info} alt="info" />
+                    <div>
+                        <div className='Location_info_text'>
+                            - There is free parking and electric car chargers at the hotel
+                        </div>
+                        <div className='Location_info_text'>
+                            - The road up to the hotel is a toll road. If you are staying overnight, you do not need to pay this toll
+                        </div>
+                        <div className='Location_info_text'>
+                            - Hønefoss is the closest town to Kleivstua that the train goes to. From here is about a 30 minute drive. 
+                        </div>
+                        <div className='Location_info_text'>
+                            - Vy is the company that runs trains and other public transportation throughout Norway. 
+                        </div>
                     </div>
                     <br />
                     <div className='Location_info_text'>
                         <b>You can either visit the web page to book tickets or download the Vy app.</b>
                     </div>
-                    <div className="Location_line_divider"/>
                     <div className='Location_directions_container'>
                         <Button
                             color="secondary"
@@ -120,8 +108,7 @@ const AdditionalInformation = () => {
                     <div className='Location_info_text'>
                         <b>Here are three travel options to Hønefoss by train using Vy on their web site:</b>
                     </div>
-                    <div className="Location_line_divider"/>
-                    <div className='Location_directions_container'>
+                    <div className='Location_directions_container' style={{marginBottom: '30px'}}>
                         <Button
                             color="secondary"
                             variant="contained"
@@ -156,12 +143,15 @@ const AdditionalInformation = () => {
                             Sandefjord Station to Hønefoss
                         </Button>
                     </div>
-                    <div className='Location_info_text'>
-                        - From the train station you can take a bus or taxi to get to Kleivstua. Tickets for this can be bought on the Vy app as well.
+                    <div>
+                        <div className='Location_info_text'>
+                            - From the train station you can take a bus or taxi to get to Kleivstua. Tickets for this can be bought on the Vy app as well.
+                        </div>
+                        <div className='Location_info_text' style={{paddingBottom: '20px'}}>
+                            - We can drive people from the Hønefoss train station to the hotel if needed.
+                        </div>
                     </div>
-                    <div className='Location_info_text' style={{paddingBottom: '20px'}}>
-                        - We can drive people from the Hønefoss train station to the hotel if needed.
-                    </div>
+                    <div className="Location_line_divider" style={{transform: 'translateY(20px)'}}/>
                 </div>
                 <div className='Location_information-text' style={{paddingTop: 'unset'}}>
                     <div className='Location_information-text-lg'>
@@ -169,84 +159,9 @@ const AdditionalInformation = () => {
                     </div>
                     <Map lat={60.16916760774383} lng={10.249274817359668} />
                 </div>
-                {/* <div className='Location_questions_form_container'>
-                    <div className='Location_questions_form'>
-                        Questions? Feel tree to send any questions to us about anything!
-                        <div className="Rsvp_form_item">
-                            <TextField
-                                color="secondary"
-                                fullWidth
-                                label="Full Name"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <AccountCircle />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                            
-                        </div>
-                        <div className="Rsvp_form_item">
-                            <TextField
-                                style={{width: '50%', paddingRight: '15px'}}
-                                color="secondary"
-                                fullWidth
-                                label="Phone Number"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleChange}
-                                required
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <Phone />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                            <TextField
-                                style={{width: '50%'}}
-                                color="secondary"
-                                fullWidth
-                                label="Email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <Mail />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        </div>
-                        <div className="Rsvp_form_item">
-                            <TextField
-                                color="secondary"
-                                fullWidth
-                                name="message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                multiline
-                                rows={4}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <Comment />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div> */}
+                <div className='Location_questions_container'>
+                    <Questions />
+                </div>
             </div>
         </div>
     );

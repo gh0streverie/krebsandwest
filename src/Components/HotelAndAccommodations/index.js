@@ -27,7 +27,6 @@ const HotelAndAccommodations = () => {
                 <div className="Handa_information_text-lg --bold">
                     Hotel and Accommodations
                 </div>
-                <div className="Handa_line_divider"/>
                 <Box sx={{width: '65%'}}>
                     <Tabs 
                         value={value} 
@@ -41,6 +40,7 @@ const HotelAndAccommodations = () => {
                     </Tabs>
                     <TabPanel value={value} index={0}>
                         <div className='Handa_info_container_color'>
+                            <div className="Handa_line_divider"/>
                             <div className="Handa_information_text --bold" >
                                 Kleivstua
                                 <br />
@@ -66,6 +66,7 @@ const HotelAndAccommodations = () => {
                                     </div>
                                 </div>
                             </div>
+                            <div className="Handa_line_divider"/>
                         </div>  
                         
                         <div className="Handa_information_text" style={{alignItems: 'flex-start'}}>
@@ -89,6 +90,7 @@ const HotelAndAccommodations = () => {
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                         <div className='Handa_info_container_color'>
+                            <div className="Handa_line_divider"/>
                             <div className="Handa_information_text --bold" style={{paddingBottom: '20px'}}>
                                 Sundvolden Hotel
                                 <br />
@@ -96,6 +98,7 @@ const HotelAndAccommodations = () => {
                                 <br />
                                 +47 32162100                
                             </div>
+                            <div className="Handa_line_divider"/>
                         </div>
                         <div className="Handa_information_text" style={{alignItems: 'flex-start'}}>
                             <div className='Handa_info_text' >

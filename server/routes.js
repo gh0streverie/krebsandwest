@@ -16,4 +16,16 @@ router.post('/sendemail', async (req, res) => {
     }
 });
 
+router.post('/sendquestion', async (req, res) => {
+    const data = req.body;
+
+    try {
+        await emailService.sendQuestion(data);
+        res.json({message: 'Success!'});
+    } catch (e) {
+        console.log(e);
+        res.json({message: 'Fail!'});
+    }
+});
+
 module.exports = router;

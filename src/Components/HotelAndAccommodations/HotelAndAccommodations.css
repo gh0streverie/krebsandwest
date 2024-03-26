@@ -94,4 +94,8 @@
     margin: 15px 0;
     background: linear-gradient(to bottom, #6f2589, #64227c);
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }

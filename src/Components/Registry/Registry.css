@@ -22,7 +22,6 @@
         }
     
         & .Registry_body {
-            padding-top: 25px;
             font-size: 22px;
             text-align: center;
         }
@@ -41,7 +40,6 @@
         & .Registry_image_travel {
             height: 100px;
             padding-top: 25px;
-            transform: translateX(7px);
         }
     }
 }
