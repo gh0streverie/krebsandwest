@@ -16,4 +16,14 @@
     .Nav_tab_text {
         font-size: 9px !important;
     }
+
+    .MuiTabs-flexContainer {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .MuiButtonBase-root {
+        min-width: 0 !important;
+        padding: 0 !important;
+    }
 }

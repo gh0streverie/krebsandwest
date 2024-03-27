@@ -11,3 +11,8 @@
     background-size: 100vh;
     background-repeat: repeat-x;
 }
+
+.MuiTabs-flexContainer {
+    align-items: center;
+    justify-content: center;
+}
