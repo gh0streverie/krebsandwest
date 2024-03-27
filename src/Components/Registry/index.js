@@ -3,6 +3,7 @@ import travel from '../../Assets/travel.png';
 import gift from '../../Assets/gift.png';
 
 import './Registry.css';
+import './Registry.Mobile.css';
 
 const Registry = (props) => {
     return (

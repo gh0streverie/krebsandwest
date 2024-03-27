@@ -7,6 +7,7 @@ import qrcode from '../../Assets/qrcode.png';
 import Map from '../Map';
 
 import './HotelAndAccommodations.css';
+import './HotelAndAccommodations.Mobile.css';
 
 const HotelAndAccommodations = () => {
     const [value, setValue] = useState(0);
@@ -27,7 +28,7 @@ const HotelAndAccommodations = () => {
                 <div className="Handa_information_text-lg --bold">
                     Hotel and Accommodations
                 </div>
-                <Box sx={{width: '65%'}}>
+                <Box className="Handa_tab_container">
                     <Tabs 
                         value={value} 
                         onChange={handleChange} 

@@ -1,0 +1,65 @@
+@media screen and (max-width: 450px) and (orientation: portrait) {
+    .Location_container {
+        padding: 100px 0;
+    }
+    
+    .Location_button_container {
+        padding-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+    }
+    
+    .Location_text_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: white;
+        border-radius: 10px;
+        z-index: 0;
+    }
+    
+    .Location_information-text {
+        padding-top: 50px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 90% !important;
+    }
+    
+    .Location_information-text-lg {
+        padding-top: 20px;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .Location_line_divider {
+        width: 70%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, white, transparent);
+    }
+    
+    .Location_info_text {
+        margin: 10px 0;
+    }
+    
+    .Location_image_info {
+        height: 100px;
+        margin-top: 20px;
+        transform: translateY(-10px);
+    }
+    
+    .Location_questions_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+}

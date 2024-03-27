@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Paper, Button } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import Questions from '../Questions';
 import Map from '../Map';
 import info from '../../Assets/info.png';
 
 import './AdditionalInformation.css';
-import Questions from '../Questions';
+import './AdditionalInformation.Mobile.css';
 
 const AdditionalInformation = () => {
     const [currentSlide, setCurrentSlide] = useState(0);

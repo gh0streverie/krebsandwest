@@ -6,6 +6,7 @@ import {COMING, DAY_OPTIONS} from '../../Utils/Constants';
 import SuccessIndicator from "../SuccessIndicator";
 
 import './Rsvp.css';
+import './Rsvp.Mobile.css';
 
 const Rsvp = () => {
     const [formData, setFormData] = useState({

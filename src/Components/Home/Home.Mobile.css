@@ -1,0 +1,64 @@
+@media screen and (max-width: 450px) and (orientation: portrait) {
+    .Home_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 0;
+        flex-direction: column;
+    }
+    
+    .Home_image {
+        max-width: fit-content;
+        width: 100%;
+    }
+    
+    .Home_text_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: white;
+        border-radius: 0px;
+        padding: 0 0 35px 0;
+        background: linear-gradient(to bottom, #6f2589, #64227c);
+        width: 100%;
+    }
+    
+    .Home_information-text {
+        padding-top: 20px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        text-shadow: 0 0 5px black;
+        width: 90%;
+    }
+    
+    .Home_information-text-lg {
+        padding: 20px 0 20px 0;
+        font-size: 30px;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        text-shadow: 0 0 5px black;
+        flex-direction: column;
+    }
+    
+    .Home_line_divider {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, white, transparent);
+    }
+    
+    .MuiButton-contained {
+        color: black;
+    }
+    
+    .Home_image_fellowship {
+        height: 50px;
+        padding: 15px 0;
+    }
+}

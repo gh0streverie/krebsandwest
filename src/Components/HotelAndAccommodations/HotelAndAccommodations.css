@@ -99,3 +99,7 @@
     justify-content: center;
     flex-direction: column;
 }
+
+.Handa_tab_container {
+    width: 65%;
+}
