@@ -14,7 +14,7 @@ const Rsvp = () => {
         phone: '',
         email: '',
         diet: '',
-        amount: '',
+        amount: 0,
         message: '',
         guests: [],
         songs: '',
@@ -97,17 +97,17 @@ const Rsvp = () => {
     };
 
     useEffect(() => {
-        const { name, amount, guests, phone, coming } = formData;
+        const { name, email, guests, phone, coming } = formData;
 
         if (name !== '' && coming === COMING.NO) {
             setIsFormValid(true)
-        } else if (name !== '' && amount !== '' && phone !== '' && guests.filter((val) => !val).length === 0) {
+        } else if (name !== '' && phone !== '' && email !== '' && guests.filter((val) => !val).length === 0) {
             setIsFormValid(true)
         } else {
             setIsFormValid(false);
         };
 
-    }, [formData.name, formData.amount, formData.guests, formData.coming, formData.phone])
+    }, [formData.name, formData.guests, formData.coming, formData.phone, formData.email])
 
     return (
         <div className="Rsvp_container">
@@ -140,7 +140,6 @@ const Rsvp = () => {
                 </div>
                 <div className="Rsvp_form_item">
                     <TextField
-                        style={{width: '50%', paddingRight: '15px'}}
                         color="secondary"
                         fullWidth
                         label="Phone Number"
@@ -156,8 +155,9 @@ const Rsvp = () => {
                             ),
                         }}
                     />
+                </div>
+                <div className="Rsvp_form_item">
                     <TextField
-                        style={{width: '50%'}}
                         color="secondary"
                         fullWidth
                         label="Email"
@@ -219,6 +219,7 @@ const Rsvp = () => {
                                 onChange={handleAmountChange}
                                 required
                             >
+                                <MenuItem value={0}>None</MenuItem>
                                 <MenuItem value={1}>1</MenuItem>
                                 <MenuItem value={2}>2</MenuItem>
                                 <MenuItem value={3}>3</MenuItem>
