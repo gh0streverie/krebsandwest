@@ -61,3 +61,67 @@
         background: linear-gradient(to right, transparent, white, transparent);
     }
 }
+
+@media screen and (max-height: 450px) and (orientation: landscape) {
+    .Rsvp_container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 100px 0;
+        flex-direction: column;
+        color: white;
+        min-height: 92.3vh;
+    }
+    
+    .Rsvp_form_container {
+        padding: 20px;
+        font-size: 18px;
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #6a2ca8;
+        border: 4px solid #6a2ca8;
+        background-color: white;
+    }
+    
+    .Rsvp_header {
+        font-size: 50px;
+    }
+    
+    .Rsvp_info {
+        padding: 20px 0 20px 0;
+        font-size: 16px;
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .Rsvp_form_item {
+        margin: 15px 0 15px 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .Rsvp_form_radio {
+        margin: 15px 0 15px 0;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: #757575;
+    }
+    
+    .Rsvp_line_divider {
+        width: 50%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, white, transparent);
+    }
+}

@@ -60,8 +60,7 @@ const AdditionalInformation = () => {
                 </Button>
             </div>
             <div className='Location_text_container'>
-                <div className="Location_line_divider" style={{transform: 'translateY(50px)'}}/>
-                <div className='Location_information-text' style={{ borderRadius: '5px', padding: '20px',  background: 'linear-gradient(to bottom, #6f2589, #64227c)', width: '65%', marginTop: '50px', transform: 'translateY(0px)'}}>
+                <div className='Location_information-text' >
                     <img className="Location_image_info" src={info} alt="info" />
                     <div>
                         <div className='Location_info_text'>
@@ -78,6 +77,9 @@ const AdditionalInformation = () => {
                         </div>
                     </div>
                     <br />
+                </div>
+                <div className="Location_line_divider" style={{transform: 'translateY(50px)'}}/>
+                <div className='Location_information-text' style={{ borderRadius: '5px', padding: '20px',  background: 'linear-gradient(to bottom, #6f2589, #64227c)', width: '65%', marginTop: '50px', transform: 'translateY(0px)'}}>
                     <div className='Location_info_text'>
                         <b>You can either visit the web page to book tickets or download the Vy app.</b>
                     </div>

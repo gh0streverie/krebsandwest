@@ -105,3 +105,111 @@
         width: 100%;
     }
 }
+
+@media screen and (max-height: 450px) and (orientation: landscape) {
+    .Handa_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+        flex-direction: column;
+    }
+    
+    .Handa_line_divider {
+        width: 50%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, white, transparent); /* Adjust color stops as needed */
+    }
+    
+    .Handa_image_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 0;
+    }
+    
+    .Handa_image {
+        width: 25%;
+        max-width: 350px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #6a2ca8;
+        border: 1px solid #6a2ca8;
+    }
+    
+    .Handa_qrcode {
+        width: 150px;
+        border-radius: 5px;
+        box-shadow: 0 0 7px #6a2ca8;
+        transform: translateY(-100px);
+        margin-bottom: -85px;
+    }
+    
+    .handa_information_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+        flex-direction: column;
+    }
+    
+    .Handa_information_text {
+        padding-top: 20px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        text-shadow: 0 0 5px black;
+        flex-direction: column;
+    }
+    
+    .--bold {
+        font-weight: 600;
+    }
+    
+    .Handa_information_text-lg {
+        padding: 20px 0 20px 0;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        text-shadow: 0 0 5px black;
+    }
+    
+    .Handa_info_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+        flex-direction: column;
+        width: 28%;
+    }
+    
+    .Handa_stay_options_container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-evenly;
+    }
+    
+    .Handa_info_text {
+        margin: 10px 0;
+    }
+    
+    .Handa_info_container_color {
+        margin: 15px 0;
+        background: linear-gradient(to bottom, #6f2589, #64227c);
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .Handa_tab_container {
+        width: 100%;
+    }
+}
