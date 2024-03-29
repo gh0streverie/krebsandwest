@@ -99,7 +99,7 @@ const Rsvp = () => {
     useEffect(() => {
         const { name, email, guests, phone, coming } = formData;
 
-        if (name !== '' && coming === COMING.NO) {
+        if (name !== '' && coming === COMING.NO && email !== '') {
             setIsFormValid(true)
         } else if (name !== '' && phone !== '' && email !== '' && guests.filter((val) => !val).length === 0) {
             setIsFormValid(true)
