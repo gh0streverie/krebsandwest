@@ -17,11 +17,10 @@ const Home = (props) => {
             <div className="Home_text_container">
                 <div className="Home_line_divider" />
                 <div className="Home_information-text-lg">
-                    Welcome to the home page for the epic quest of Heather and Kristoffer's union
+                    Your handbook to get you there and back again - A wedding tale
+                    <br />
+                    By Heather and Kristoffer
                     <img className="Home_image_fellowship" src={fellowship} alt="Example" />
-                    Your handbook to get you there and back again
-                </div>
-                <div className="Home_information-text ">
                     Prepare your +5 charisma for a celebration of legendary proportions.
                     Adventure awaits as we embark on this quest for eternal love. Grab your potions and join us on this nerdy journey!
                 </div>
@@ -37,15 +36,15 @@ const Home = (props) => {
                 RSVP Here
             </Button>
             <div className="Home_text_container" style={{ background: 'unset' }}>
-                <div className="Home_information-text ">
-                    Please respond with your ability to attend before the 1st of August
+                <div className="Home_information-text-lg">
+                    Please RSVP before the 1st of August, whether you can attend or not
                 </div>
             </div>
-                {/* <div style={{height: '33vh', width: '100vw', backgroundColor: '#0d0d6f'}} />
+            {/* <div style={{height: '33vh', width: '100vw', backgroundColor: '#0d0d6f'}} />
           <div style={{height: '33vh', width: '100vw', backgroundColor: '#6f2589'}} />
           <div style={{height: '33vh', width: '100vw', backgroundColor: '#cd3754'}} /> */}
-            </div>
-            );
+        </div>
+    );
 }
 
-            export default React.memo(Home);
+export default React.memo(Home);

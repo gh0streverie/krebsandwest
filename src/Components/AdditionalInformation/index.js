@@ -64,16 +64,19 @@ const AdditionalInformation = () => {
                     <img className="Location_image_info" src={info} alt="info" />
                     <div>
                         <div className='Location_info_text'>
-                            - There is free parking and electric car chargers at the hotel
+                            - Free parking and electric car chargers at the hotel.
                         </div>
                         <div className='Location_info_text'>
-                            - The road up to the hotel is a toll road. If you are staying overnight, you do not need to pay this toll
+                            - The road up to the hotel is a toll road. You do not need to pay this toll when staying at the hotel or attending the wedding.
                         </div>
                         <div className='Location_info_text'>
-                            - Hønefoss is the closest town to Kleivstua that the train goes to. From here is about a 30 minute drive. 
+                            - Hønefoss is the closest town to Kleivstua that has a train station. From there is about a 30 minute drive to Kleivstua.
                         </div>
                         <div className='Location_info_text'>
-                            - Vy is the company that runs trains and other public transportation throughout Norway. 
+                            - Vy is the company that runs trains and other public transportation throughout Norway.
+                        </div>
+                        <div className='Location_info_text'>
+                            - If purchasing with a non-Norwegian bank card, you can only purchase through the website. The apps will be useful for tracking purchases and seeing train schedules and information.
                         </div>
                     </div>
                     <br />
@@ -148,10 +151,10 @@ const AdditionalInformation = () => {
                     </div>
                     <div>
                         <div className='Location_info_text'>
-                            - From the train station you can take a bus or taxi to get to Kleivstua. Tickets for this can be bought on the Vy app as well.
+                            - From the train station you can take a bus or taxi to get to Kleivstua. Tickets for this can be bought through Vy as well
                         </div>
                         <div className='Location_info_text' style={{paddingBottom: '20px'}}>
-                            - We can drive people from the Hønefoss train station to the hotel if needed.
+                            - We can drive people from the Hønefoss train station to the hotel if available and needed. Please arrange with Heather.
                         </div>
                     </div>
                     <div className="Location_line_divider" style={{transform: 'translateY(20px)'}}/>
@@ -161,9 +164,6 @@ const AdditionalInformation = () => {
                         Hønefoss Train station
                     </div>
                     <Map lat={60.16916760774383} lng={10.249274817359668} />
-                </div>
-                <div className='Location_questions_container'>
-                    <Questions />
                 </div>
             </div>
         </div>

@@ -8,23 +8,23 @@ import './Registry.Mobile.css';
 const Registry = (props) => {
     return (
         <div className='Registry_container'>
+            <div className="Registry_line_divider" />
             <div className='Registry_message_container'>
-                <div className="Registry_line_divider" style={{transform: 'translateY(-100px)'}}/>
                 <img className="Registry_image_gift" src={gift} alt="gift" />
                 <div className='Registry_header' style={{marginBottom: '30px'}}>
                     Registry
                 </div>
-                <div className='Registry_body' style={{width: '50vw', marginTop: '30px'}}>
-                    Please know that your presence at our wedding is present enough! However, for friends and family who have been asking for gift ideas, we are asking for a gift of money to our travel fund, as we intend to explore and travel the world.
+                <div className='Registry_body'>
+                    Please know that your presence at our wedding is present enough! However, for friends and family who have been asking for gift ideas, we are asking for a gift of money for our travel fund, home improvment fund, or anything life throws our way fund. As we intend to explore the world and be DIY home owners. Feel free to specify which you would like your gift to go towards.                    <br />
                     <br />
                     Thank you!     
                 </div>
-                <div className='Registry_body' style={{width: '50vw', marginTop: '30px'}}>
+                <div className='Registry_body'>
                     ~ Heather and Kristoffer
                 </div>
                 <img className="Registry_image_travel" src={travel} alt="travel" />
-                <div className="Registry_line_divider" style={{transform: 'translateY(100px)'}}/>
             </div>
+            <div className="Registry_line_divider"/>
         </div>
     );
 };

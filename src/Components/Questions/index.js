@@ -4,6 +4,7 @@ import { AccountCircle, Comment, Mail, Phone, Send } from '@mui/icons-material';
 import SuccessIndicator from "../SuccessIndicator";
 
 import './Questions.css';
+import './Questions.Mobile.css';
 
 const Questions = (props) => {
     const [formData, setFormData] = useState({
@@ -79,95 +80,97 @@ const Questions = (props) => {
     }, [formData.name, formData.phone, formData.email, formData.message])
 
     return (
-        <div className='Questions_form_container'>
-            <div className='Questions_form'>
-                Questions? Feel tree to send any questions to us about anything!
-                <div className="Questions_form_item">
-                    <TextField
-                        color="secondary"
-                        fullWidth
-                        label="Full Name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <AccountCircle />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
+        <div className='Questions_container'>
+            <div className='Questions_form_container'>
+                <div className='Questions_form'>
+                    Questions? Feel tree to send any questions to us about anything!
+                    <div className="Questions_form_item">
+                        <TextField
+                            color="secondary"
+                            fullWidth
+                            label="Full Name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <AccountCircle />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
 
+                    </div>
+                    <div className="Questions_form_item">
+                        <TextField
+                            style={{ width: '50%', paddingRight: '15px' }}
+                            color="secondary"
+                            fullWidth
+                            label="Phone Number"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            required
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <Phone />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                        <TextField
+                            style={{ width: '50%' }}
+                            color="secondary"
+                            fullWidth
+                            label="Email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <Mail />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </div>
+                    <div className="Questions_form_item">
+                        <TextField
+                            color="secondary"
+                            fullWidth
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            multiline
+                            rows={4}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <Comment />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </div>
+                    <div className="Rsvp_form_item">
+                        <Button
+                            onClick={sendQuestion}
+                            color="secondary"
+                            variant="contained"
+                            disabled={!isFormValid}
+                            size="large"
+                            endIcon={loading ? null : <Send />}
+                        >
+                            {loading ? <CircularProgress color="inherit" /> : 'Send Question'}
+                        </Button>
+                    </div>
+                    <SuccessIndicator open={open} success={success} handleClose={handleClose} indicatorMessage={'Thank you for the question!'}/>
                 </div>
-                <div className="Questions_form_item">
-                    <TextField
-                        style={{ width: '50%', paddingRight: '15px' }}
-                        color="secondary"
-                        fullWidth
-                        label="Phone Number"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        required
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Phone />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                    <TextField
-                        style={{ width: '50%' }}
-                        color="secondary"
-                        fullWidth
-                        label="Email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Mail />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </div>
-                <div className="Questions_form_item">
-                    <TextField
-                        color="secondary"
-                        fullWidth
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        multiline
-                        rows={4}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Comment />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </div>
-                <div className="Rsvp_form_item">
-                    <Button
-                        onClick={sendQuestion}
-                        color="secondary"
-                        variant="contained"
-                        disabled={!isFormValid}
-                        size="large"
-                        endIcon={loading ? null : <Send />}
-                    >
-                        {loading ? <CircularProgress color="inherit" /> : 'Send Question'}
-                    </Button>
-                </div>
-                <SuccessIndicator open={open} success={success} handleClose={handleClose} indicatorMessage={'Thank you for the question!'}/>
             </div>
         </div>
     );

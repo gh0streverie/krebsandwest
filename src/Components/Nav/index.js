@@ -8,6 +8,7 @@ import Registry from '../Registry';
 
 import './Nav.css';
 import './Nav.Mobile.css';
+import Questions from '../Questions';
 
 const Nav = () => {
     const [value, setValue] = useState(0);
@@ -34,6 +35,7 @@ const Nav = () => {
                         <Tab className='Nav_tab_text' label="Additional Information" />
                         <Tab className='Nav_tab_text' label="Registry" />
                         <Tab className='Nav_tab_text' label="RSVP"/>
+                        <Tab className='Nav_tab_text' label="Questions"/>
                     </Tabs>
                     <TabPanel value={value} index={0}>
                         <Home handleChange={handleChange}/>
@@ -49,6 +51,9 @@ const Nav = () => {
                     </TabPanel>
                     <TabPanel value={value} index={4}>
                         <Rsvp />
+                    </TabPanel>
+                    <TabPanel value={value} index={5}>
+                        <Questions />
                     </TabPanel>
                 </Box>
             </div>

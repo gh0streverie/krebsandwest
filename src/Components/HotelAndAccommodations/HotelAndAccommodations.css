@@ -1,9 +1,5 @@
 .Handa_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 25px;
-    flex-direction: column;
+    padding: 100px 0;
 }
 
 .Handa_line_divider {
@@ -31,8 +27,6 @@
     width: 150px;
     border-radius: 5px;
     box-shadow: 0 0 7px #6a2ca8;
-    transform: translateY(-100px);
-    margin-bottom: -85px;
 }
 
 .handa_information_container {
@@ -102,4 +96,12 @@
 
 .Handa_tab_container {
     width: 65%;
+}
+
+.Handa_button_container {
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
 }

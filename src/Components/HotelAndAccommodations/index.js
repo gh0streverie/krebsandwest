@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { Tabs, Tab, Box } from '@mui/material';
-import kleivstua1 from '../../Assets/kleivstua1.webp';
-import kleivstua2 from '../../Assets/kleivstua2.jpg';
-import kleivstua3 from '../../Assets/kleivstua3.jpg';
+import { Tabs, Tab, Box, Paper, Button } from '@mui/material';
+import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import qrcode from '../../Assets/qrcode.png';
 import Map from '../Map';
 
@@ -11,17 +9,59 @@ import './HotelAndAccommodations.Mobile.css';
 
 const HotelAndAccommodations = () => {
     const [value, setValue] = useState(0);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     const handleChange = (_, newValue) => {
         setValue(newValue);
     };
 
+    const images = [
+        'https://kleivstuahotell.no/wp-content/uploads/sites/28/2024/01/Kleivstua-Hotel-by-Classic-Norway-Hotels-LR-15.jpg', 
+        'https://kleivstuahotell.no/wp-content/uploads/sites/28/2024/01/Kleivstua-Hotel-by-Classic-Norway-Hotels-LR-20.jpg', 
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/121411607.jpg?k=5e75a5b35c305c994931b5368492b7eb34e01a33eeb0998975e73f438ab40d56&o=&hp=1'
+    ];
+
+    const handleNextSlide = () => {
+        setCurrentSlide((prevSlide) => (prevSlide === images.length - 1 ? 0 : prevSlide + 1));
+    };
+
+    const handlePrevSlide = () => {
+        setCurrentSlide((prevSlide) => (prevSlide === 0 ? images.length - 1 : prevSlide - 1));
+    };
+
     return (
-        <div className="handa_container">
-            <div className="Handa_image_container">
-                <img className="Handa_image" src={kleivstua1} alt="kleivstua1" />
-                <img className="Handa_image" src={kleivstua2} alt="kleivstua2" />
-                <img className="Handa_image" src={kleivstua3} alt="kleivstua2" />
+        <div className="Handa_container">
+            <div style={{position: 'relative', overflow: 'hidden', height: 300}}>
+                {images.map((image, index) => (
+                    <Paper
+                        key={index}
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100%',
+                            width: '100%',
+                            position: 'absolute',
+                            left: `${(index - currentSlide) * 100}%`,
+                            transition: 'left 0.5s ease-in-out',
+                            backgroundImage: `url(${image})`,
+                            backgroundSize: 'auto cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: '1200px',
+                            backgroundColor: 'rgba(255, 255, 255, 0)'
+                        }}
+                        elevation={3}
+                    />
+                ))}
+            </div>
+            <div className='Handa_button_container'>
+                <Button color="secondary" onClick={handlePrevSlide}>
+                    <ArrowBackIos />
+                </Button>
+                <Button color="secondary" onClick={handleNextSlide}>
+                    <ArrowForwardIos />
+                </Button>
             </div>
             <div className="handa_information_container">
                 <img className="Handa_qrcode" src={qrcode} alt="qrcode" />
@@ -70,22 +110,23 @@ const HotelAndAccommodations = () => {
                             <div className="Handa_line_divider"/>
                         </div>  
                         
-                        <div className="Handa_information_text" style={{alignItems: 'flex-start'}}>
+                        <div className="Handa_information_text">
+                            <div className='Handa_info_text'>
+                                - Room bookings will be done through heather once your RSVP is submitted, do not contact the hotel directly
+                            </div>
                             <div className='Handa_info_text' >
                                 - Saturday no rooms are available
                             </div>
                             <div className='Handa_info_text'>
-                                - Breakfast served each morning
+                                - Breakfast included with the stay each morning
                             </div>
                             <div className='Handa_info_text'>
-                                - Baguette lunch included for all who stay thursday night
+                                - Baguette lunch on Friday included for all who stay thursday night
                             </div>
                             <div className='Handa_info_text'>
                                 - Check in at 15:00, and check out 11:00
                             </div>
-                            <div className='Handa_info_text'>
-                                - Room bookings will be done through heather once the RSVP is made, do not contact hotel about stays
-                            </div>
+                            
                         </div>
                         <Map lat={60.047031757553746} lng={10.321760046031777} />
                     </TabPanel>
