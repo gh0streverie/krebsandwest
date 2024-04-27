@@ -8,7 +8,7 @@ class EmailService {
         const { name, phone, email, diet, amount, message, guests, songs, coming, days } = data;
 
         return {
-            to: 'kristoffer.c.west@gmail.com',
+            to: 'familyt@krebsandwest.com',
             from: FROM_EMAIL,
             subject: 'Wedding RSVP Received!',
             text: 'RSVP',
@@ -94,7 +94,7 @@ class EmailService {
         const { name, phone, email, message } = data;
 
         return {
-            to: 'kristoffer.c.west@gmail.com',
+            to: 'familyt@krebsandwest.com',
             from: FROM_EMAIL,
             subject: `Wedding Question From ${name}`,
             text: 'Question',

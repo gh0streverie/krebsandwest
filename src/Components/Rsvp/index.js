@@ -123,7 +123,7 @@ const Rsvp = () => {
                     <TextField
                         color="secondary"
                         fullWidth
-                        label="Full Name"
+                        label="Adventurers Full Name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
@@ -183,8 +183,8 @@ const Rsvp = () => {
                             name="coming"
                             onChange={handleChange}
                         >
-                            <FormControlLabel value={COMING.YES} control={<Radio />} label="Yes, I will be attending" />
-                            <FormControlLabel value={COMING.NO} control={<Radio />} label="Unfortunately, I will not be able to attend" />
+                            <FormControlLabel value={COMING.YES} control={<Radio />} label="Yea, I will be attending" />
+                            <FormControlLabel value={COMING.NO} control={<Radio />} label="Unfortunately nay, I will not be able to attend" />
                         </RadioGroup>
                     </FormControl>
                 </div>
@@ -208,12 +208,12 @@ const Rsvp = () => {
                 {formData.coming === COMING.YES && 
                     <div className="Rsvp_form_item">
                         <FormControl fullWidth>
-                            <InputLabel id="guests-label">Additional Guests</InputLabel>
+                            <InputLabel id="guests-label">How many companions will be in your party?</InputLabel>
                             <Select
                                 labelId="guests-label"
                                 color="secondary"
                                 fullWidth
-                                label="Additional Guests"
+                                label="How many companions will be in your party?"
                                 name="amount"
                                 value={formData.amount}
                                 onChange={handleAmountChange}
@@ -255,7 +255,7 @@ const Rsvp = () => {
                         <TextField
                             color="secondary"
                             fullWidth
-                            label="Song requests at reception"
+                            label="Song requests for the receptions bard!"
                             name="songs"
                             value={formData.songs}
                             onChange={handleChange}
@@ -274,7 +274,7 @@ const Rsvp = () => {
                         <TextField
                             color="secondary"
                             fullWidth
-                            label="Dietary requirements or food allergies"
+                            label="Dietary requirements or food allergies?"
                             name="diet"
                             value={formData.diet}
                             onChange={handleChange}
