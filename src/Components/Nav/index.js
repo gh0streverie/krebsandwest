@@ -31,8 +31,8 @@ const Nav = () => {
                         style={{background: 'linear-gradient(rgb(4 4 49), rgb(3 3 73))', color: 'black', position: 'fixed', width: '100%', zIndex: '99'}}
                     >
                         <Tab className='Nav_tab_text' label="Home" />
-                        <Tab className='Nav_tab_text' label="Hotel and Accommodations" />
-                        <Tab className='Nav_tab_text' label="Additional Information" />
+                        <Tab className='Nav_tab_text' label="Hotel Info" />
+                        <Tab className='Nav_tab_text' label="More Info" />
                         <Tab className='Nav_tab_text' label="Registry" />
                         <Tab className='Nav_tab_text' label="RSVP"/>
                         <Tab className='Nav_tab_text' label="Questions"/>

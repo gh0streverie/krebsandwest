@@ -83,7 +83,9 @@ const Questions = (props) => {
         <div className='Questions_container'>
             <div className='Questions_form_container'>
                 <div className='Questions_form'>
-                    Questions? Feel tree to send any questions to us about anything!
+                    <div className='Questions_header'>
+                        Questions? Feel free to send questions to us about anything!
+                    </div>
                     <div className="Questions_form_item">
                         <TextField
                             color="secondary"

@@ -112,7 +112,7 @@ const HotelAndAccommodations = () => {
                         
                         <div className="Handa_information_text">
                             <div className='Handa_info_text'>
-                                - Room bookings will be done through heather once your RSVP is submitted, do not contact the hotel directly
+                                - Room bookings will be done through Heather once your RSVP is submitted, do not contact the hotel directly
                             </div>
                             <div className='Handa_info_text' >
                                 - Saturday no rooms are available
@@ -121,7 +121,7 @@ const HotelAndAccommodations = () => {
                                 - Breakfast included with the stay each morning
                             </div>
                             <div className='Handa_info_text'>
-                                - Baguette lunch on Friday included for all who stay thursday night
+                                - Baguette lunch on Friday included for all who stay Thursday night
                             </div>
                             <div className='Handa_info_text'>
                                 - Check in at 15:00, and check out 11:00
@@ -147,7 +147,7 @@ const HotelAndAccommodations = () => {
                                 - Rooms available at Kleivstua for Thursday and Friday night
                             </div>
                             <div className='Handa_info_text' >
-                                - Other accomodations available in the town as well            
+                                - Other accomodations available in Sundvollen as well            
                             </div>
                             <br />
                         </div>

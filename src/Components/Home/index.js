@@ -37,7 +37,7 @@ const Home = (props) => {
             </Button>
             <div className="Home_text_container" style={{ background: 'unset' }}>
                 <div className="Home_information-text-lg">
-                    Please RSVP before the 1st of August, whether you can attend or not
+                    Please RSVP before the 1st of July, whether you can attend or not
                 </div>
             </div>
             {/* <div style={{height: '33vh', width: '100vw', backgroundColor: '#0d0d6f'}} />

@@ -116,7 +116,7 @@ const Rsvp = () => {
             </div>
             <div className="Rsvp_line_divider" />
             <div className="Rsvp_info">
-                Please respond with your ability to attend before the 1st of August
+                Please respond with your ability to attend before the 1st of July
             </div>
             <div className="Rsvp_form_container">
                 <div className="Rsvp_form_item">
