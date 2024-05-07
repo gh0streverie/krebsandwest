@@ -15,43 +15,43 @@ class EmailService {
             html: `
               <div> 
                   <div>
-                      ${name}
+                      Name: ${name}
                   </div>
                   <br />
                   <div>
-                      ${phone}
+                      Phone: ${phone}
                   </div>
                   <br />
                   <div>
-                      ${email}
+                      Email: ${email}
                   </div>
                   <br />
                   <div>
-                      ${coming}
+                      Coming: ${coming}
                   </div>
                   <br />
                   <div>
-                      ${days}
+                      Days Staying: ${days}
                   </div>
                   <br />
                   <div> 
-                      ${amount}
+                      Additional Guests: ${amount}
                   </div>
                   <br />
                   <div> 
-                      ${new Array(guests).join(', ')}
+                      Guest names: ${new Array(guests).join(', ')}
                   </div>
                   <br />
                   <div>
-                      ${diet}
+                      Diet Restrictions: ${diet}
                   </div>
                   <br />
                   <div>
-                      ${songs}
+                      Song Requests: ${songs}
                   </div>
                   <br />
                   <div>
-                      ${message}
+                      Message: ${message}
                   </div>
               </div>
           `,
