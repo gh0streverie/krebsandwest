@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 const EmailService = require('./Services/EmailService');
 const ImageService = require('./Services/ImageService');
 
 const emailService = new EmailService();
+const upload = multer({ dest: 'uploads/' });
 
 router.post('/sendemail', async (req, res) => {
     const data = req.body;

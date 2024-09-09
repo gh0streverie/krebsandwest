@@ -30,14 +30,15 @@ class ImageUploader extends Component {
                 formData.append('images', file);
             });
 
-            fetch('/api/upload', {
+            fetch('/api/uploadimages', {
                 domain,
                 method: 'POST',
                 body: formData
             })
-                .then(response => {
+                .then(response => response.json())
+                .then(data => {
                     this.setState((prevState) => ({
-                        images: [...prevState.images, ...response.data],
+                        images: [...prevState.images, ...data],
                     }));
                 })
                 .catch(error => {
