@@ -36,7 +36,7 @@ router.post('/uploadimages', upload.array('images', 10), async (req, res) => {
     const data = req.body;
 
     try {
-        await imageService.saveImage(req.files);
+        await imageService.saveImage(req.files, res);
         res.json({message: 'Success!'});
     } catch (e) {
         console.log(e);

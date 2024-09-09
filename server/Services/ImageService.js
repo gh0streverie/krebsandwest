@@ -13,7 +13,7 @@ class ImageService {
         });
     }
 
-    async saveImage(files) {
+    async saveImage(files, res) {
         try {
             const uploadedImages = await Promise.all(
                 files.map(async (file) => {
