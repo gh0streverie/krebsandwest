@@ -11,11 +11,18 @@ const emailService = new EmailService();
 // const imageService = new ImageService();
 const upload = multer({ dest: 'uploads/' });
 
+function formatPrivateKey(key) {
+    const header = '-----BEGIN PRIVATE KEY-----\n';
+    const footer = '\n-----END PRIVATE KEY-----\n';
+    const content = key.replace(/\\n/g, '\n').trim();
+    return `${header}${content}${footer}`;
+}
+
 const storage = new Storage({
     projectId: process.env.STORAGE_ID,
     credentials: {
         client_email: process.env.STORAGE_EMAIL,
-        private_key: process.env.STORAGE_KEY,
+        private_key: formatPrivateKey(process.env.STORAGE_KEY),
     },
 });
 
@@ -54,7 +61,6 @@ router.post('/uploadimages', upload.array('images', 10), async (req, res) => {
                     destination: fileName,
                 });
 
-                // Delete the temporary file
                 fs.unlinkSync(filePath);
 
                 return { url: `https://storage.googleapis.com/kandw_weddingpics/${fileName}` };
