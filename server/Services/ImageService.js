@@ -18,7 +18,7 @@ class ImageService {
             const uploadedImages = await Promise.all(
                 files.map(async (file) => {
                     const fileName = `${Date.now()}-${file.originalname}`;
-                    await storage.bucket('kandw_weddingpics').file(fileName).save(file.buffer);
+                    await this.storage.bucket('kandw_weddingpics').file(fileName).save(file.buffer);
                     return { url: `https://storage.googleapis.com/kandw_weddingpics/${fileName}` };
                 })
             );
