@@ -4,6 +4,8 @@ const multer = require('multer');
 const EmailService = require('./Services/EmailService');
 const ImageService = require('./Services/ImageService');
 const { Storage } = require('@google-cloud/storage');
+const path = require('path');
+const fs = require('fs');
 
 const emailService = new EmailService();
 // const imageService = new ImageService();
