@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const EmailService = require('./Services/EmailService');
+const ImageService = require('./Services/ImageService');
 
 const emailService = new EmailService();
 
@@ -21,6 +22,18 @@ router.post('/sendquestion', async (req, res) => {
 
     try {
         await emailService.sendQuestion(data);
+        res.json({message: 'Success!'});
+    } catch (e) {
+        console.log(e);
+        res.json({message: 'Fail!'});
+    }
+});
+
+router.post('/uploadimages', upload.array('images', 10), async (req, res) => {
+    const data = req.body;
+
+    try {
+        await ImageService.saveImage(req.files);
         res.json({message: 'Success!'});
     } catch (e) {
         console.log(e);
