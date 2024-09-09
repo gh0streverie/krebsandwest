@@ -4,7 +4,7 @@ class ImageService {
     storage = null;
 
     constructor() {
-        storage = new Storage({
+        this.storage = new Storage({
             projectId: process.env.STORAGE_ID,
             credentials: {
                 client_email: process.env.STORAGE_EMAIL,
