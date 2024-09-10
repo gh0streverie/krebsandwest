@@ -12,19 +12,21 @@ const emailService = new EmailService();
 // const imageService = new ImageService();
 const upload = multer({ dest: 'uploads/' });
 
-function formatPrivateKey(key) {
-    const header = '-----BEGIN PRIVATE KEY-----\n';
-    const footer = '\n-----END PRIVATE KEY-----\n';
-    const content = key.replace(/\\n/g, '\n').trim();
-    return `${header}${content}${footer}`;
-}
-
 const storage = new Storage({
     projectId: process.env.STORAGE_ID,
     credentials: {
-        client_email: process.env.STORAGE_EMAIL,
-        private_key: formatPrivateKey(process.env.STORAGE_KEY),
-    },
+        type: "service_account",
+        project_id: "kinetic-guild-411121",
+        private_key_id: "50074243982b23742be7e58f767dc56bde4d20a0",
+        private_key: process.env.STORAGE_KEY.replace(/\\n/g, '\n').trim(),
+        client_email: "462598051861-compute@developer.gserviceaccount.com",
+        client_id: "109428912061390333538",
+        auth_uri: "https://accounts.google.com/o/oauth2/auth",
+        token_uri: "https://oauth2.googleapis.com/token",
+        auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+        client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/462598051861-compute%40developer.gserviceaccount.com",
+        universe_domain: "googleapis.com"
+    }
 });
 
 router.post('/sendemail', async (req, res) => {
