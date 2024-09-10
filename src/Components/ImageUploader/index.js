@@ -38,7 +38,7 @@ class ImageUploader extends Component {
                 .then(response => response.json())
                 .then(data => {
                     this.setState((prevState) => ({
-                        images: [...prevState.images, ...data],
+                        images: [...prevState.images, ...files],
                     }));
                 })
                 .catch(error => {
