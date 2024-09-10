@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import {
     Card, CardHeader, CardContent,
     Grid, Box, Button, IconButton,
@@ -69,11 +69,11 @@ const ImageUploader = () => {
                         />
                     </Button>
                     <Grid container spacing={2}>
-                        {this.state.images.map(({ url }, index) => (
+                        {images.map((image, index) => (
                             <Grid item xs={4} key={index}>
                                 <Box position="relative">
                                     <img
-                                        src={url}
+                                        src={URL.createObjectURL(image)}
                                         alt={`Uploaded Image ${index}`}
                                         className="w-full h-auto object-cover rounded-md"
                                     />
