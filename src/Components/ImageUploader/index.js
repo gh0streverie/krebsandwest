@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Typography, Box, LinearProgress, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -21,10 +21,13 @@ const ImageUploader = () => {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [previews, setPreviews] = useState([]);
     const [uploading, setUploading] = useState(false);
+    const [validationError, setValidationError] = useState(false);
+    const [requestError, setRequestError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleFileSelect = (event) => {
         const files = Array.from(event.target.files);
-        setSelectedFiles(files);
+        setSelectedFiles([...selectedFiles, ...files]);
 
         const newPreviews = files.map(file => ({
             file,
@@ -46,6 +49,8 @@ const ImageUploader = () => {
 
     const handleUpload = async () => {
         if (selectedFiles.length > 0) {
+            setErrorMessage("");
+            setRequestError(false);
             setUploading(true);
             const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
@@ -65,6 +70,8 @@ const ImageUploader = () => {
                         setUploading(false);
                     })
                     .catch(error => {
+                        setErrorMessage("Whoops, something went wrong saving the pictures. Please try again.");
+                        setRequestError(true);
                         setUploading(false);
                         console.error(error);
                     });
@@ -76,13 +83,26 @@ const ImageUploader = () => {
         }
     };
 
+    useEffect(() => {
+        if (selectedFiles && selectedFiles.length > 15) {
+            setErrorMessage("Please select a max of 15 images at once");
+            setValidationError(true);
+        } else {
+            setErrorMessage("");
+            setValidationError(false);
+        }
+    }, [selectedFiles])
+
     return (
         <div className='ImageUploader_container'>
             <div className='ImageUploader_sky'>
                 <Box sx={{ mt: 4, textAlign: 'center' }}>
                     <img className="ImageUploader_image_travel" src={travel} alt="travel" />
                     <Typography variant="h3" gutterBottom>
-                        Please upload your wedding photos here!
+                        Please upload your wedding photos here.
+                    </Typography>
+                    <Typography variant="h3" gutterBottom>
+                        <b>Thank you!</b>
                     </Typography>
                     <Box sx={{ mt: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom: '15px' }}>
                         <div className='ImageUploader_line_divider' />
@@ -105,12 +125,20 @@ const ImageUploader = () => {
                     </label>
                     {selectedFiles.length > 0 && (
                         <Box sx={{ mt: 2 }}>
-                            <Typography variant="body1">{selectedFiles.length} file(s) selected</Typography>
+                            <Typography variant="body1">
+                                {selectedFiles.length} file(s) selected
+                            </Typography>
+                            {
+                                (validationError || requestError) &&
+                                <Typography variant="body1" sx={{color: 'red'}}>
+                                    <b>{errorMessage}</b>
+                                </Typography>
+                            }
                             <Button
                                 variant="contained"
                                 color="primary"
                                 onClick={handleUpload}
-                                disabled={uploading}
+                                disabled={uploading || validationError}
                                 sx={{ mt: 2 }}
                             >
                                 Upload All
