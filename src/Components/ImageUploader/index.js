@@ -132,7 +132,7 @@ const ImageUploader = () => {
                                         color="error"
                                         size="small"
                                         onClick={() => handleRemove(index)}
-                                        sx={{ position: 'absolute', top: 5, right: 110 }}
+                                        sx={{ position: 'absolute', top: 5, transform: 'translatex(-80px)' }}
                                     >
                                         Remove
                                     </Button>
