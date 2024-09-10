@@ -12,8 +12,8 @@ const Input = styled('input')({
 });
 
 const ImagePreview = styled('img')({
-    width: '100%',
-    height: '150px',
+    height: '100%',
+    width: '350px',
     objectFit: 'cover',
 });
 
@@ -44,14 +44,14 @@ const ImageUploader = () => {
         setSelectedFiles(newSelectedFiles);
     };
 
-    const handleUpload = async (files) => {
+    const handleUpload = async () => {
         if (selectedFiles.length > 0) {
             setUploading(true);
             const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
             try {
                 const formData = new FormData();
-                Array.from(files).forEach((file) => {
+                Array.from(selectedFiles).forEach((file) => {
                     formData.append('images', file);
                 });
 
@@ -132,7 +132,7 @@ const ImageUploader = () => {
                                         color="error"
                                         size="small"
                                         onClick={() => handleRemove(index)}
-                                        sx={{ position: 'absolute', top: 5, right: 5 }}
+                                        sx={{ position: 'absolute', top: 5, right: 110 }}
                                     >
                                         Remove
                                     </Button>
