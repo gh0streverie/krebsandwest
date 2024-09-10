@@ -1,103 +1,148 @@
 import React, { useState } from 'react';
-import {
-    Card, CardHeader, CardContent,
-    Grid, Box, Button, IconButton,
-    Divider
-} from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
+import { Button, Typography, Box, LinearProgress, Grid } from '@mui/material';
+import { styled } from '@mui/system';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import travel from '../../Assets/travel.png';
+
+import './ImageUploader.css';
+import './ImageUploader.mobile.css';
+
+const Input = styled('input')({
+    display: 'none',
+});
+
+const ImagePreview = styled('img')({
+    width: '100%',
+    height: '150px',
+    objectFit: 'cover',
+});
 
 const ImageUploader = () => {
-    const [images, setImages] = useState([]);
+    const [selectedFiles, setSelectedFiles] = useState([]);
+    const [previews, setPreviews] = useState([]);
+    const [uploading, setUploading] = useState(false);
 
+    const handleFileSelect = (event) => {
+        const files = Array.from(event.target.files);
+        setSelectedFiles(files);
 
-    const handleFileChange = (event) => {
-        uploadImages(event.target.files);
+        const newPreviews = files.map(file => ({
+            file,
+            preview: URL.createObjectURL(file)
+        }));
+
+        setPreviews(prevPreviews => [...prevPreviews, ...newPreviews]);
     };
 
-    const handleRemoveImage = (index) => {
-        const updatedImages = [...images];
-        updatedImages.splice(index, 1);
-        setImages(updatedImages);
+    const handleRemove = (index) => {
+        const newPreviews = [...previews];
+        newPreviews.splice(index, 1);
+        setPreviews(newPreviews);
+
+        const newSelectedFiles = [...selectedFiles];
+        newSelectedFiles.splice(index, 1);
+        setSelectedFiles(newSelectedFiles);
     };
 
-    const uploadImages = async (files) => {
-        const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
+    const handleUpload = async (files) => {
+        if (selectedFiles.length > 0) {
+            setUploading(true);
+            const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
-        try {
-            const formData = new FormData();
-            Array.from(files).forEach((file) => {
-                formData.append('images', file);
-            });
-
-            fetch('/api/uploadimages', {
-                domain,
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    setImages([...images, ...Array.from(files)]);
-                })
-                .catch(error => {
-                    console.error(error);
+            try {
+                const formData = new FormData();
+                Array.from(files).forEach((file) => {
+                    formData.append('images', file);
                 });
 
+                fetch('/api/uploadimages', {
+                    domain,
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(() => {
+                        setUploading(false);
+                    })
+                    .catch(error => {
+                        setUploading(false);
+                        console.error(error);
+                    });
 
-        } catch (error) {
-            console.error('Error uploading images:', error);
+
+            } catch (error) {
+                console.error('Error uploading images:', error);
+            }
         }
     };
 
     return (
-        <Card>
-            <CardHeader title="Image Uploader" />
-            <Divider />
-            <CardContent>
-                <Box>
-                    <Button
-                        variant="contained"
-                        component="label"
-                        fullWidth
-                        sx={{ mb: 2 }}
-                    >
-                        Upload Images
-                        <input
-                            type="file"
+        <div className='ImageUploader_container'>
+            <div className='ImageUploader_sky'>
+                <Box sx={{ mt: 4, textAlign: 'center' }}>
+                    <img className="ImageUploader_image_travel" src={travel} alt="travel" />
+                    <Typography variant="h3" gutterBottom>
+                        Please upload your wedding photos here!
+                    </Typography>
+                    <Box sx={{ mt: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom: '15px' }}>
+                        <div className='ImageUploader_line_divider' />
+                    </Box>
+                    <label htmlFor="contained-button-file">
+                        <Input
+                            accept="image/*"
+                            id="contained-button-file"
                             multiple
-                            onChange={handleFileChange}
-                            hidden
+                            type="file"
+                            onChange={handleFileSelect}
                         />
-                    </Button>
-                    <Grid container spacing={2}>
-                        {images.map((image, index) => (
-                            <Grid item xs={4} key={index}>
-                                <Box position="relative">
-                                    <img
-                                        src={URL.createObjectURL(image)}
-                                        alt={`Uploaded Image ${index}`}
-                                        className="w-full h-auto object-cover rounded-md"
-                                    />
-                                    <IconButton
-                                        onClick={() => handleRemoveImage(index)}
-                                        sx={{
-                                            position: 'absolute',
-                                            top: 4,
-                                            right: 4,
-                                            backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                                            '&:hover': {
-                                                backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                                            },
-                                        }}
+                        <Button
+                            variant="contained"
+                            component="span"
+                            startIcon={<CloudUploadIcon />}
+                        >
+                            Select Images
+                        </Button>
+                    </label>
+                    {selectedFiles.length > 0 && (
+                        <Box sx={{ mt: 2 }}>
+                            <Typography variant="body1">{selectedFiles.length} file(s) selected</Typography>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleUpload}
+                                disabled={uploading}
+                                sx={{ mt: 2 }}
+                            >
+                                Upload All
+                            </Button>
+                        </Box>
+                    )}
+                    {uploading && (
+                        <Box sx={{ mt: 2 }}>
+                            <LinearProgress />
+                        </Box>
+                    )}
+                    <Grid container spacing={2} sx={{ mt: 2 }}>
+                        {previews.map((preview, index) => (
+                            <Grid item xs={12} sm={6} md={4} key={index}>
+                                <Box sx={{ position: 'relative' }}>
+                                    <ImagePreview src={preview.preview} alt={`Preview ${index}`} />
+                                    <Button
+                                        variant="contained"
+                                        color="error"
+                                        size="small"
+                                        onClick={() => handleRemove(index)}
+                                        sx={{ position: 'absolute', top: 5, right: 5 }}
                                     >
-                                        <CloseIcon />
-                                    </IconButton>
+                                        Remove
+                                    </Button>
                                 </Box>
                             </Grid>
                         ))}
                     </Grid>
                 </Box>
-            </CardContent>
-        </Card>
+            </div>
+        </div>
     );
 }
 

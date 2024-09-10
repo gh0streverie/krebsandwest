@@ -8,7 +8,7 @@ const SiteRouter = () => {
         <Router>
             <Routes>
                 <Route path="/" Component={Nav} />
-                <Route path="/ImageUploader" Component={ImageUploader} />
+                <Route path="/photos" Component={ImageUploader} />
             </Routes>
         </Router>
     );

@@ -57,7 +57,7 @@ router.post('/uploadimages', upload.array('images', 10), async (req, res) => {
     try {
         const uploadedImages = await Promise.all(
             req.files.map(async (file) => {
-                const fileName = file.originalname;
+                const fileName = `${Date.now()}-${file.originalname}`;
                 const filePath = path.join(__dirname, file.path);
 
                 await storage.bucket('kandw_weddingpics').upload(filePath, {
