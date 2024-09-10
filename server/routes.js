@@ -53,7 +53,7 @@ router.post('/sendquestion', async (req, res) => {
     }
 });
 
-router.post('/uploadimages', upload.array('images', 10), async (req, res) => {
+router.post('/uploadimages', upload.array('images', 15), async (req, res) => {
     try {
         const uploadedImages = await Promise.all(
             req.files.map(async (file) => {
