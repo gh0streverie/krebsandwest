@@ -6,6 +6,7 @@ const ImageService = require('./Services/ImageService');
 const { Storage } = require('@google-cloud/storage');
 const path = require('path');
 const fs = require('fs');
+const { randomUUID } = require('crypto');
 
 const emailService = new EmailService();
 // const imageService = new ImageService();
@@ -54,7 +55,7 @@ router.post('/uploadimages', upload.array('images', 10), async (req, res) => {
     try {
         const uploadedImages = await Promise.all(
             req.files.map(async (file) => {
-                const fileName = `${Date.now()}-${file.originalname}`;
+                const fileName = `${randomUUID}-${file.originalname}`;
                 const filePath = path.join(__dirname, file.path);
 
                 await storage.bucket('kandw_weddingpics').upload(filePath, {
