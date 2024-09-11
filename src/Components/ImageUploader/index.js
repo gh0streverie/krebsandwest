@@ -86,7 +86,7 @@ const ImageUploader = () => {
                     formData.append('images', file);
                 });
 
-                formData.forEach((form) => {
+                formDataArray.forEach((form) => {
                     fetch('/api/uploadimages', {
                         domain,
                         method: 'POST',
