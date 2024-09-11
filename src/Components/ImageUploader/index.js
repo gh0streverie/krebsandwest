@@ -7,6 +7,8 @@ import travel from '../../Assets/travel.png';
 import './ImageUploader.css';
 import './ImageUploader.mobile.css';
 
+const MAX_TRANSFER_SIZE = 75 * 1024 * 1024; // 75 MB
+
 const Input = styled('input')({
     display: 'none',
 });
@@ -19,6 +21,7 @@ const ImagePreview = styled('img')({
 
 const ImageUploader = () => {
     const [selectedFiles, setSelectedFiles] = useState([]);
+    const [selectedFilesTotalSize, setSelectedFilesTotalSize] = useState(0);
     const [previews, setPreviews] = useState([]);
     const [uploading, setUploading] = useState(false);
     const [validationError, setValidationError] = useState(false);
@@ -26,25 +29,38 @@ const ImageUploader = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const handleFileSelect = (event) => {
+        let newTotalSize = selectedFilesTotalSize;
         const files = Array.from(event.target.files);
-        setSelectedFiles([...selectedFiles, ...files]);
+
+        files.forEach((file) => {
+            newTotalSize += file.size
+        });
 
         const newPreviews = files.map(file => ({
             file,
             preview: URL.createObjectURL(file)
         }));
 
+        setSelectedFiles([...selectedFiles, ...files]);
+        setSelectedFilesTotalSize(newTotalSize);
         setPreviews(prevPreviews => [...prevPreviews, ...newPreviews]);
     };
 
     const handleRemove = (index) => {
+        let newTotalSize = 0;
         const newPreviews = [...previews];
         newPreviews.splice(index, 1);
-        setPreviews(newPreviews);
 
         const newSelectedFiles = [...selectedFiles];
         newSelectedFiles.splice(index, 1);
+
+        newSelectedFiles.forEach((file) => {
+            newTotalSize += file.size
+        });
+
         setSelectedFiles(newSelectedFiles);
+        setSelectedFilesTotalSize(newTotalSize);
+        setPreviews(newPreviews);
     };
 
     const handleUpload = async () => {
@@ -55,27 +71,38 @@ const ImageUploader = () => {
             const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
             try {
-                const formData = new FormData();
+                const formDataArray = [];
+                let formData = new FormData();
+                let size = 0;
+
                 Array.from(selectedFiles).forEach((file) => {
+                    if ((size + file.size) >= MAX_TRANSFER_SIZE) {
+                        formDataArray.push(formData);
+                        size = 0;
+                        formData = new FormData();
+                    }
+
+                    size += file.size;
                     formData.append('images', file);
                 });
 
-                fetch('/api/uploadimages', {
-                    domain,
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(() => {
-                        setUploading(false);
+                formData.forEach((form) => {
+                    fetch('/api/uploadimages', {
+                        domain,
+                        method: 'POST',
+                        body: form
                     })
-                    .catch(error => {
-                        setErrorMessage("Whoops, something went wrong saving the pictures. Please try again.");
-                        setRequestError(true);
-                        setUploading(false);
-                        console.error(error);
-                    });
-
+                        .then(response => response.json())
+                        .then(() => {
+                            setUploading(false);
+                        })
+                        .catch(error => {
+                            setErrorMessage("Whoops, something went wrong saving the pictures. Please try again.");
+                            setRequestError(true);
+                            setUploading(false);
+                            console.error(error);
+                        });
+                })
 
             } catch (error) {
                 console.error('Error uploading images:', error);
@@ -92,6 +119,16 @@ const ImageUploader = () => {
             setValidationError(false);
         }
     }, [selectedFiles])
+
+    // useEffect(() => {
+    //     if (selectedFilesTotalSize >= MAX_TRANSFER_SIZE) {
+    //         setErrorMessage("Maximum file size reached. Please remove images until you don't see this error message any more, then upload them. \n To upload more pictures, remove ones that you have saved and add new ones.");
+    //         setValidationError(true);
+    //     } else {
+    //         setErrorMessage("");
+    //         setValidationError(false);
+    //     }
+    // }, [selectedFilesTotalSize]);
 
     return (
         <div className='ImageUploader_container'>
