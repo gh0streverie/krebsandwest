@@ -89,19 +89,19 @@ const ImageUploader = () => {
             setRequestError(false);
 
             try {
-                const formDataArray = [];
-                let formData = new FormData();
+                const formDataArray = [new FormData()];
                 let size = 0;
+                let index = 0;
 
                 Array.from(selectedFiles).forEach((file) => {
                     if ((size + file.size) >= MAX_TRANSFER_SIZE) {
-                        formDataArray.push(formData);
                         size = 0;
-                        formData = new FormData();
+                        formDataArray.push(new FormData());
+                        index++;
                     }
 
                     size += file.size;
-                    formData.append('images', file);
+                    formDataArray[index].append('images', file);
                 });
 
                 formDataArray.forEach((form) => {
