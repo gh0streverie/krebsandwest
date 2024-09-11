@@ -63,12 +63,30 @@ const ImageUploader = () => {
         setPreviews(newPreviews);
     };
 
+    const sendImageUploadRequest = async (formData) => {
+        const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
+
+        fetch('/api/uploadimages', {
+            domain,
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(() => {
+                setUploading(false);
+            })
+            .catch(error => {
+                setErrorMessage("Whoops, something went wrong saving the pictures. Please try again.");
+                setRequestError(true);
+                setUploading(false);
+                console.error(error);
+            });
+    }
+
     const handleUpload = async () => {
         if (selectedFiles.length > 0) {
             setErrorMessage("");
             setRequestError(false);
-            setUploading(true);
-            const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
             try {
                 const formDataArray = [];
@@ -87,21 +105,8 @@ const ImageUploader = () => {
                 });
 
                 formDataArray.forEach((form) => {
-                    fetch('/api/uploadimages', {
-                        domain,
-                        method: 'POST',
-                        body: form
-                    })
-                        .then(response => response.json())
-                        .then(() => {
-                            setUploading(false);
-                        })
-                        .catch(error => {
-                            setErrorMessage("Whoops, something went wrong saving the pictures. Please try again.");
-                            setRequestError(true);
-                            setUploading(false);
-                            console.error(error);
-                        });
+                    setUploading(true);
+                    sendImageUploadRequest(form);
                 })
 
             } catch (error) {
