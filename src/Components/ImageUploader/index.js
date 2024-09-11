@@ -115,15 +115,15 @@ const ImageUploader = () => {
         }
     };
 
-    useEffect(() => {
-        if (selectedFiles && selectedFiles.length > 15) {
-            setErrorMessage("Please select a max of 15 images at once");
-            setValidationError(true);
-        } else {
-            setErrorMessage("");
-            setValidationError(false);
-        }
-    }, [selectedFiles])
+    // useEffect(() => {
+    //     if (selectedFiles && selectedFiles.length > 15) {
+    //         setErrorMessage("Please select a max of 15 images at once");
+    //         setValidationError(true);
+    //     } else {
+    //         setErrorMessage("");
+    //         setValidationError(false);
+    //     }
+    // }, [selectedFiles])
 
     // useEffect(() => {
     //     if (selectedFilesTotalSize >= MAX_TRANSFER_SIZE) {
