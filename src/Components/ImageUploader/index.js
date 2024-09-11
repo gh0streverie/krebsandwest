@@ -78,10 +78,10 @@ const ImageUploader = () => {
         })
             .then(response => response.json())
             .then(() => {
-                setRequestSuccess(true);
-                setSuccessMessage("Pictures uploaded sucessfully, thank you! To send more, remove the existing images and select different ones.");
                 setProgress(progress + 1);
                 if (index == segments) {
+                    setRequestSuccess(true);
+                    setSuccessMessage("Pictures uploaded sucessfully, thank you! To send more, remove the existing images and select different ones.");
                     setUploading(false);
                 }
             })
@@ -89,9 +89,7 @@ const ImageUploader = () => {
                 setErrorMessage("Whoops, something went wrong saving the pictures. Please try again.");
                 setRequestError(true);
                 console.error(error);
-                if (index == segments) {
-                    setUploading(false);
-                }
+                setUploading(false);
             });
     }
 
