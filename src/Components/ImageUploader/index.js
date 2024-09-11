@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Typography, Box, LinearProgress, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import ClearIcon from '@mui/icons-material/Clear';
 import travel from '../../Assets/travel.png';
 
 import './ImageUploader.css';
@@ -67,7 +68,7 @@ const ImageUploader = () => {
         setPreviews(newPreviews);
     };
 
-    const sendImageUploadRequest = async (formData) => {
+    const sendImageUploadRequest = async (formData, index) => {
         const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
         fetch('/api/uploadimages', {
@@ -78,15 +79,19 @@ const ImageUploader = () => {
             .then(response => response.json())
             .then(() => {
                 setRequestSuccess(true);
-                setSuccessMessage("Pictures uploaded sucessfully, thank you! To send more, remove the existing images and select different ones.")
-                setUploading(false);
+                setSuccessMessage("Pictures uploaded sucessfully, thank you! To send more, remove the existing images and select different ones.");
                 setProgress(progress + 1);
+                if (index == segments) {
+                    setUploading(false);
+                }
             })
             .catch(error => {
                 setErrorMessage("Whoops, something went wrong saving the pictures. Please try again.");
                 setRequestError(true);
-                setUploading(false);
                 console.error(error);
+                if (index == segments) {
+                    setUploading(false);
+                }
             });
     }
 
@@ -113,9 +118,9 @@ const ImageUploader = () => {
 
                 setSegments(formDataArray.length);
 
-                formDataArray.forEach((form) => {
+                formDataArray.forEach((form, i) => {
                     setUploading(true);
-                    sendImageUploadRequest(form);
+                    sendImageUploadRequest(form, i + 1);
                 })
 
             } catch (error) {
@@ -123,6 +128,11 @@ const ImageUploader = () => {
             }
         }
     };
+
+    const clearImages = () => {
+        setSelectedFiles([]);
+        setPreviews([]);
+    }
 
     // useEffect(() => {
     //     if (selectedFiles && selectedFiles.length > 15) {
@@ -174,6 +184,15 @@ const ImageUploader = () => {
                             Select Images
                         </Button>
                     </label>
+                    <Button
+                        variant="contained"
+                        component="span"
+                        onClick={clearImages}
+                        startIcon={<ClearIcon />}
+                        sx={{marginLeft: '10px'}}
+                    >
+                        Clear Images
+                    </Button>
                     {selectedFiles.length > 0 && (
                         <Box sx={{ mt: 2 }}>
                             <Typography variant="body1">
