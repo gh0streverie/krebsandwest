@@ -27,6 +27,10 @@ const ImageUploader = () => {
     const [validationError, setValidationError] = useState(false);
     const [requestError, setRequestError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [requestSuccess, setRequestSuccess] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
+    const [segments, setSegments] = useState(0);
+    const [progress, setProgress] = useState(0);
 
     const handleFileSelect = (event) => {
         let newTotalSize = selectedFilesTotalSize;
@@ -73,7 +77,10 @@ const ImageUploader = () => {
         })
             .then(response => response.json())
             .then(() => {
+                setRequestSuccess(true);
+                setSuccessMessage("Pictures uploaded sucessfully, thank you! To send more, remove the existing images and select different ones.")
                 setUploading(false);
+                setProgress(progress + 1);
             })
             .catch(error => {
                 setErrorMessage("Whoops, something went wrong saving the pictures. Please try again.");
@@ -103,6 +110,8 @@ const ImageUploader = () => {
                     size += file.size;
                     formDataArray[index].append('images', file);
                 });
+
+                setSegments(formDataArray.length);
 
                 formDataArray.forEach((form) => {
                     setUploading(true);
@@ -176,6 +185,12 @@ const ImageUploader = () => {
                                     <b>{errorMessage}</b>
                                 </Typography>
                             }
+                            {
+                                (requestSuccess) &&
+                                <Typography variant="body1" sx={{color: 'green'}}>
+                                    <b>{successMessage}</b>
+                                </Typography>
+                            }
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -189,7 +204,7 @@ const ImageUploader = () => {
                     )}
                     {uploading && (
                         <Box sx={{ mt: 2 }}>
-                            <LinearProgress />
+                            <LinearProgress variant="determinate" value={progress / segments} />
                         </Box>
                     )}
                     <Grid container spacing={2} sx={{ mt: 2 }}>
