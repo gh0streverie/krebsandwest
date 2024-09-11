@@ -68,7 +68,8 @@ const ImageUploader = () => {
         setPreviews(newPreviews);
     };
 
-    const sendImageUploadRequest = async (formData, index) => {
+    const sendImageUploadRequest = async (formData, index, total) => {
+
         const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
         fetch('/api/uploadimages', {
@@ -79,7 +80,7 @@ const ImageUploader = () => {
             .then(response => response.json())
             .then(() => {
                 setProgress(progress + 1);
-                if (index == segments) {
+                if (index === total) {
                     setRequestSuccess(true);
                     setSuccessMessage("Pictures uploaded sucessfully, thank you! To send more, remove the existing images and select different ones.");
                     setUploading(false);
@@ -118,7 +119,7 @@ const ImageUploader = () => {
 
                 formDataArray.forEach((form, i) => {
                     setUploading(true);
-                    sendImageUploadRequest(form, i + 1);
+                    sendImageUploadRequest(form, (i + 1), formDataArray.length);
                 })
 
             } catch (error) {
@@ -222,6 +223,7 @@ const ImageUploader = () => {
                     {uploading && (
                         <Box sx={{ mt: 2 }}>
                             <LinearProgress variant="determinate" value={progress / segments} />
+                            <LinearProgress  />
                         </Box>
                     )}
                     <Grid container spacing={2} sx={{ mt: 2 }}>
