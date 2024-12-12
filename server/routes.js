@@ -2,14 +2,11 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const EmailService = require('./Services/EmailService');
-const ImageService = require('./Services/ImageService');
 const { Storage } = require('@google-cloud/storage');
 const path = require('path');
 const fs = require('fs');
-const { randomUUID } = require('crypto');
 
 const emailService = new EmailService();
-// const imageService = new ImageService();
 const upload = multer({ dest: 'uploads/' });
 
 const storage = new Storage({
@@ -73,6 +70,17 @@ router.post('/uploadimages', upload.array('images', 500), async (req, res) => {
     } catch (error) {
         console.error('Error uploading images:', error);
         res.status(500).json({ error: 'Failed to upload images' });
+    }
+});
+
+router.get('/getimages', async (req, res) => {
+    try {
+        const bucket = storage.bucket('kandw_weddingpics');
+        const [files] = await bucket.getFiles();
+        const imageFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name));
+        res.json(imageFiles.map((file) => file.name));
+    } catch (error) {
+        console.error('Error fetching image file names:', error);
     }
 });
 
