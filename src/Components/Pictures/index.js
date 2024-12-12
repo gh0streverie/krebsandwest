@@ -5,18 +5,20 @@ const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 const Pictures = () => {
     const [imageUrls, setImageUrls] = useState([]);
 
-    fetch('/api/getimages', {
-        domain,
-        method: 'GET'
-    })
-        .then(response => response.json())
-        .then((data) => {
-            setImageUrls(data);
+    useState(() => {
+        fetch('/api/getimages', {
+            domain,
+            method: 'GET'
         })
-        .catch(error => {
-            console.error(error);
-        });
-    
+            .then(response => response.json())
+            .then((data) => {
+                setImageUrls(data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, [])
+
     return (
         <div>
             {imageUrls.map((url) => <img alt="an image" style={{width: '300px', padding: '10px'}} src={url}/>)}
