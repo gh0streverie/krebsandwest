@@ -21,8 +21,7 @@ const Pictures = () => {
 
     return (
         <div>
-            {imageUrls.map((url) => <img alt="an image" style={{width: '300px', padding: '10px'}} src={url}/>)}
-            <img style={{width: '300px', padding: '10px'}} src="https://storage.cloud.google.com/kandw_weddingpics/1726007381405-1000002239.jpg"/>
+            {imageUrls.map((url) => <img alt="an image" style={{width: '300px', padding: '10px'}} src={`https://storage.cloud.google.com/kandw_weddingpics/${url}`}/>)}
         </div>
     );
 };
