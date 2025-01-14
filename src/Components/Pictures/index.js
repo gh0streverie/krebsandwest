@@ -8,7 +8,7 @@ const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
 const Pictures = () => {
     const [imageOffset, setImageOffset] = useState(0);
-    const [imageAmount, setImageAmount] = useState(50);
+    const [imageAmount, setImageAmount] = useState(10);
     const [imageIds, setImageIds] = useState([]);
 
     useEffect(() => {
@@ -59,7 +59,7 @@ const Pictures = () => {
                     Next
                 </Button>
             </div>
-            {imageIds.slice(imageOffset, (imageOffset + imageAmount)).map((id) => <img alt="an image" style={{width: '300px', padding: '10px'}} src={`https://storage.cloud.google.com/kandw_weddingpics/${id}`}/>)}
+            {imageIds.slice(imageOffset, (imageOffset + imageAmount)).map((id) => <img alt="an image" style={{width: '450px', padding: '10px'}} src={`https://storage.cloud.google.com/kandw_weddingpics/${id}`}/>)}
         </div> 
     );
 };
