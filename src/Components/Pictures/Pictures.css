@@ -1,0 +1,11 @@
+.Pictures_nav-btn-container {
+    display: flex;
+    align-items: flex-start;
+    width: 100vw;
+    justify-content: center;
+    padding: 20px 0;
+
+    & .css-1clzr65-MuiButtonBase-root-MuiButton-root {
+        width: 150px;
+    }
+}
