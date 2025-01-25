@@ -1,16 +1,117 @@
-.Pictures_container {
-    height: 100vh;
-    width: 100vw;
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    /* White background */
+    color: #333;
 }
 
-.Pictures_nav-btn-container {
-    display: flex;
-    align-items: flex-start;
-    width: 100vw;
-    justify-content: center;
-    padding: 20px 0;
+/* Header Styles */
+.header {
+    background: #0d0d6f;
+    /* Updated header color */
+    color: white;
+    /* White text for contrast */
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+}
 
-    & .css-1clzr65-MuiButtonBase-root-MuiButton-root {
-        width: 150px;
-    }
+.header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.header p {
+    margin: 10px 0 0;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    /* Slightly transparent white for the subtitle */
+}
+
+/* Image List Styles */
+.image-list-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    /* White background behind images */
+}
+
+.image-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.image-list-item {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-list-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Stronger shadow on hover */
+}
+
+.image-list-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+/* Loading Spinner Styles */
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    /* White background behind the loader */
+}
+
+/* Full-Screen Dialog Styles */
+.dialog-content {
+    position: relative;
+    padding: 20px;
+    background-color: white;
+    /* White background for the dialog */
+    border-radius: 12px;
+    /* Rounded corners */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow for the dialog */
+}
+
+.dialog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    /* Center the image */
+}
+
+.close-button {
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Semi-transparent white */
+    border-radius: 50%;
+    padding: 8px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for the button */
+    z-index: 1;
+}
+
+.close-button:hover {
+    background-color: rgba(255, 255, 255, 1);
+    /* Solid white on hover */
 }

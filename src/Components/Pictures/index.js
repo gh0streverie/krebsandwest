@@ -1,35 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     ImageList,
     ImageListItem,
     Dialog,
     DialogContent,
     IconButton,
-    useMediaQuery,
-    useTheme,
+    CircularProgress,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-
-import './Pictures.css';
+import "./Pictures.css"; // Import the CSS file
 
 const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
 const Pictures = () => {
-    const [open, setOpen] = useState(false);
-    const [selectedImage, setSelectedImage] = useState("");
-    const [images, setImages] = useState([]);
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-
-    const handleClickOpen = (image) => {
-        setSelectedImage(image);
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     useEffect(() => {
         fetch('/api/getimages', {
             domain,
@@ -42,45 +25,98 @@ const Pictures = () => {
             .catch(error => {
                 console.error(error);
             });
-    }, [])
+    }, []);
+    const [images, setImages] = useState([]);
+
+    const [open, setOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState("");
+    const [visibleCount, setVisibleCount] = useState(6); // Number of images to show initially
+    const [loading, setLoading] = useState(false); // Loading state for infinite scroll
+    const loaderRef = useRef(null); // Ref for the loader element
+
+    const handleClickOpen = (image) => {
+        setSelectedImage(image);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    // Load more images when the user scrolls to the bottom
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const firstEntry = entries[0];
+                if (firstEntry.isIntersecting && !loading && visibleCount < images.length) {
+                    setLoading(true);
+                    // Simulate a delay for loading more images
+                    setTimeout(() => {
+                        setVisibleCount((prevCount) => prevCount + 6);
+                        setLoading(false);
+                    }, 500); // Adjust the delay as needed
+                }
+            },
+            { threshold: 1.0 } // Trigger when the loader is fully visible
+        );
+
+        if (loaderRef.current) {
+            observer.observe(loaderRef.current);
+        }
+
+        return () => {
+            if (loaderRef.current) {
+                observer.unobserve(loaderRef.current);
+            }
+        };
+    }, [visibleCount, loading, images.length]);
 
     return (
-        <div className="Pictures_container">
+        <div>
+            {/* Fancy Header */}
+            <div className="header">
+                <h1>Wedding Picture Gallery</h1>
+                <p>Scroll to explore more images</p>
+            </div>
+
             {/* Image Previews using ImageList */}
-            <ImageList cols={3} gap={8}>
-                {images.map((image, index) => (
-                    <ImageListItem key={index}>
-                        <img
-                            src={image}
-                            alt={`preview-${index}`}
-                            style={{ width: "100%", cursor: "pointer" }}
-                            onClick={() => handleClickOpen(image)}
-                        />
-                    </ImageListItem>
-                ))}
-            </ImageList>
+            <div className="image-list-container">
+                <ImageList className="image-list" cols={3} gap={8}>
+                    {images.slice(0, visibleCount).map((image, index) => (
+                        <ImageListItem key={index} className="image-list-item">
+                            <img
+                                src={image}
+                                alt={`preview-${index}`}
+                                onClick={() => handleClickOpen(image)}
+                                loading="lazy" // Enable lazy loading for better performance
+                            />
+                        </ImageListItem>
+                    ))}
+                </ImageList>
+            </div>
+
+            {/* Loading Spinner for Infinite Scroll */}
+            {visibleCount < images.length && (
+                <div ref={loaderRef} className="loader">
+                    <CircularProgress color="primary" />
+                </div>
+            )}
 
             {/* Full-Screen Dialog */}
-            <Dialog
-                fullScreen={fullScreen}
-                open={open}
-                onClose={handleClose}
-                maxWidth="lg"
-            >
-                <DialogContent>
+            <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth>
+                <DialogContent className="dialog-content">
                     <IconButton
+                        className="close-button"
                         edge="end"
                         color="inherit"
                         onClick={handleClose}
                         aria-label="close"
-                        style={{ position: "absolute", right: 8, top: 8 }}
                     >
                         <CloseIcon />
                     </IconButton>
                     <img
                         src={selectedImage}
                         alt="full-screen"
-                        style={{ width: "100%", height: "auto" }}
                     />
                 </DialogContent>
             </Dialog>
