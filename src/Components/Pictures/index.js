@@ -54,19 +54,22 @@ const Pictures = () => {
                     setTimeout(() => {
                         setVisibleCount((prevCount) => prevCount + 6);
                         setLoading(false);
-                    }, 500); // Adjust the delay as needed
+                    }, 1000); // Adjust the delay as needed
                 }
             },
             { threshold: 1.0 } // Trigger when the loader is fully visible
         );
 
-        if (loaderRef.current) {
-            observer.observe(loaderRef.current);
+        const currentLoader = loaderRef.current;
+
+        if (currentLoader) {
+            observer.observe(currentLoader);
         }
 
+        // Cleanup the observer when the component unmounts or when the loaderRef changes
         return () => {
-            if (loaderRef.current) {
-                observer.unobserve(loaderRef.current);
+            if (currentLoader) {
+                observer.unobserve(currentLoader);
             }
         };
     }, [visibleCount, loading, images.length]);
@@ -75,8 +78,8 @@ const Pictures = () => {
         <div>
             {/* Fancy Header */}
             <div className="header">
-                <h1>Wedding Picture Gallery</h1>
-                <p>Scroll to explore more images</p>
+                <h1>Modern Image Gallery</h1>
+                <p>Scroll to explore more stunning images</p>
             </div>
 
             {/* Image Previews using ImageList */}
