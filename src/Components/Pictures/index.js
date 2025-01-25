@@ -54,10 +54,10 @@ const Pictures = () => {
                     setTimeout(() => {
                         setVisibleCount((prevCount) => prevCount + 6);
                         setLoading(false);
-                    }, 1000); // Adjust the delay as needed
+                    }, 1200); // Adjust the delay as needed
                 }
             },
-            { threshold: 1.0 } // Trigger when the loader is fully visible
+            { threshold: 0.5 } // Trigger when the loader is fully visible
         );
 
         const currentLoader = loaderRef.current;
@@ -72,13 +72,13 @@ const Pictures = () => {
                 observer.unobserve(currentLoader);
             }
         };
-    }, [visibleCount, loading, images.length]);
+    }, [visibleCount, loading, images.length]); // Reattach observer when these dependencies change
 
     return (
         <div>
             {/* Fancy Header */}
             <div className="header">
-                <h1>Modern Image Gallery</h1>
+                <h1>Wedding Photo Gallery</h1>
                 <p>Scroll to explore more stunning images</p>
             </div>
 
