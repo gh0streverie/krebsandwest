@@ -1,3 +1,8 @@
+.Pictures_container {
+    height: 100vh;
+    width: 100vw;
+}
+
 .Pictures_nav-btn-container {
     display: flex;
     align-items: flex-start;

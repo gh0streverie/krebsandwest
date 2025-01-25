@@ -1,15 +1,34 @@
-import { useEffect, useState } from "react";
-import { Button } from '@mui/material';
-import {ArrowForward, ArrowBack} from '@mui/icons-material';
+import React, { useState, useEffect } from "react";
+import {
+    ImageList,
+    ImageListItem,
+    Dialog,
+    DialogContent,
+    IconButton,
+    useMediaQuery,
+    useTheme,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 import './Pictures.css';
 
 const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
 const Pictures = () => {
-    const [imageOffset, setImageOffset] = useState(0);
-    const [imageAmount, setImageAmount] = useState(10);
-    const [imageIds, setImageIds] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState("");
+    const [images, setImages] = useState([]);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+    const handleClickOpen = (image) => {
+        setSelectedImage(image);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         fetch('/api/getimages', {
@@ -18,49 +37,54 @@ const Pictures = () => {
         })
             .then(response => response.json())
             .then((data) => {
-                setImageIds(data);
+                setImages(data.map((id) => `https://storage.cloud.google.com/kandw_weddingpics/${id}`));
             })
             .catch(error => {
                 console.error(error);
             });
     }, [])
 
-    const changeIndex = (direction) => {
-        if (direction === "+") {
-            if ((imageOffset + imageAmount) <= imageIds.length) {
-                setImageOffset(imageOffset + imageAmount);
-            }
-        } else {
-            if ((imageOffset - 50) >= 0) {
-                setImageOffset(imageOffset - imageAmount);
-            }
-        }
-    }
-
     return (
-        <div>
-            <div className="Pictures_nav-btn-container">
-                <Button
-                    variant="contained"
-                    component="span"
-                    onClick={() => changeIndex("-")}
-                    startIcon={<ArrowBack />}
-                    sx={{marginLeft: '10px'}}
-                >
-                    Previous
-                </Button>
-                <Button
-                    variant="contained"
-                    component="span"
-                    onClick={() => changeIndex("+")}
-                    startIcon={<ArrowForward />}
-                    sx={{marginLeft: '10px'}}
-                >
-                    Next
-                </Button>
-            </div>
-            {imageIds.slice(imageOffset, (imageOffset + imageAmount)).map((id) => <img alt="an image" style={{width: '450px', padding: '10px'}} src={`https://storage.cloud.google.com/kandw_weddingpics/${id}`}/>)}
-        </div> 
+        <div className="Pictures_container">
+            {/* Image Previews using ImageList */}
+            <ImageList cols={3} gap={8}>
+                {images.map((image, index) => (
+                    <ImageListItem key={index}>
+                        <img
+                            src={image}
+                            alt={`preview-${index}`}
+                            style={{ width: "100%", cursor: "pointer" }}
+                            onClick={() => handleClickOpen(image)}
+                        />
+                    </ImageListItem>
+                ))}
+            </ImageList>
+
+            {/* Full-Screen Dialog */}
+            <Dialog
+                fullScreen={fullScreen}
+                open={open}
+                onClose={handleClose}
+                maxWidth="lg"
+            >
+                <DialogContent>
+                    <IconButton
+                        edge="end"
+                        color="inherit"
+                        onClick={handleClose}
+                        aria-label="close"
+                        style={{ position: "absolute", right: 8, top: 8 }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                    <img
+                        src={selectedImage}
+                        alt="full-screen"
+                        style={{ width: "100%", height: "auto" }}
+                    />
+                </DialogContent>
+            </Dialog>
+        </div>
     );
 };
 
