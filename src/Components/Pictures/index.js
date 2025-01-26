@@ -30,9 +30,12 @@ const Pictures = () => {
 
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
-    const [visibleCount, setVisibleCount] = useState(6); // Number of images to show initially
+    const [startIndex, setStartIndex] = useState(0); // Start index of the visible window
     const [loading, setLoading] = useState(false); // Loading state for infinite scroll
-    const loaderRef = useRef(null); // Ref for the loader element
+    const loaderRef = useRef(null); // Ref for the bottom loader element
+    const topLoaderRef = useRef(null); // Ref for the top loader element
+    const windowSize = 36; // Maximum number of images to load at a time
+    const loadStep = 9; // Number of images to load at a time
 
     const handleClickOpen = (image) => {
         setSelectedImage(image);
@@ -48,16 +51,16 @@ const Pictures = () => {
         const observer = new IntersectionObserver(
             (entries) => {
                 const firstEntry = entries[0];
-                if (firstEntry.isIntersecting && !loading && visibleCount < images.length) {
+                if (firstEntry.isIntersecting && !loading && startIndex + windowSize < images.length) {
                     setLoading(true);
                     // Simulate a delay for loading more images
                     setTimeout(() => {
-                        setVisibleCount((prevCount) => prevCount + 6);
+                        setStartIndex((prevIndex) => prevIndex + loadStep); // Slide the window forward by 10 images
                         setLoading(false);
-                    }, 1200); // Adjust the delay as needed
+                    }, 500); // Adjust the delay as needed
                 }
             },
-            { threshold: 0.5 } // Trigger when the loader is fully visible
+            { threshold: 0.9 } // Trigger when the loader is fully visible
         );
 
         const currentLoader = loaderRef.current;
@@ -72,24 +75,65 @@ const Pictures = () => {
                 observer.unobserve(currentLoader);
             }
         };
-    }, [visibleCount, loading, images.length]); // Reattach observer when these dependencies change
+    }, [startIndex, loading, images.length, windowSize, loadStep]);
+
+    // Load previous images when the user scrolls to the top
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const firstEntry = entries[0];
+                if (firstEntry.isIntersecting && !loading && startIndex > 0) {
+                    setLoading(true);
+                    // Simulate a delay for loading previous images
+                    setTimeout(() => {
+                        setStartIndex((prevIndex) => Math.max(0, prevIndex - loadStep)); // Slide the window backward by 10 images
+                        setLoading(false);
+                    }, 500); // Adjust the delay as needed
+                }
+            },
+            { threshold: 1.0 } // Trigger when the loader is fully visible
+        );
+
+        const currentTopLoader = topLoaderRef.current;
+
+        if (currentTopLoader) {
+            observer.observe(currentTopLoader);
+        }
+
+        // Cleanup the observer when the component unmounts or when the topLoaderRef changes
+        return () => {
+            if (currentTopLoader) {
+                observer.unobserve(currentTopLoader);
+            }
+        };
+    }, [startIndex, loading, windowSize, loadStep]);
+
+    // Calculate the visible images based on the current window
+    const visibleImages = images.slice(startIndex, startIndex + windowSize);
 
     return (
         <div>
             {/* Fancy Header */}
             <div className="header">
-                <h1>Wedding Photo Gallery</h1>
+                <h1>Modern Image Gallery</h1>
                 <p>Scroll to explore more stunning images</p>
             </div>
+
+            {/* Top Loader for Scrolling Up */}
+            {startIndex > 0 && (
+                <div ref={topLoaderRef} className="loader">
+                    <CircularProgress color="primary" />
+                </div>
+            )}
 
             {/* Image Previews using ImageList */}
             <div className="image-list-container">
                 <ImageList className="image-list" cols={3} gap={8}>
-                    {images.slice(0, visibleCount).map((image, index) => (
-                        <ImageListItem key={index} className="image-list-item">
+                    {visibleImages.map((image, index) => (
+                        <ImageListItem key={startIndex + index} className="image-list-item">
                             <img
                                 src={image}
-                                alt={`preview-${index}`}
+                                alt={`preview-${startIndex + index}`}
                                 onClick={() => handleClickOpen(image)}
                                 loading="lazy" // Enable lazy loading for better performance
                             />
@@ -98,8 +142,8 @@ const Pictures = () => {
                 </ImageList>
             </div>
 
-            {/* Loading Spinner for Infinite Scroll */}
-            {visibleCount < images.length && (
+            {/* Bottom Loader for Scrolling Down */}
+            {startIndex + windowSize < images.length && (
                 <div ref={loaderRef} className="loader">
                     <CircularProgress color="primary" />
                 </div>

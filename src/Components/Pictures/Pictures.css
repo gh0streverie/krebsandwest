@@ -71,12 +71,11 @@ body {
 
 /* Loading Spinner Styles */
 .loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background-color: white;
-    /* White background behind the loader */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: white; /* White background behind the loader */
 }
 
 /* Full-Screen Dialog Styles */
