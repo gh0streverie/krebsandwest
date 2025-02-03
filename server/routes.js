@@ -80,7 +80,7 @@ router.get('/getimages', async (req, res) => {
         const bucket = storage.bucket(`kandw_${BUCKETS[b]}`);
         const [files] = await bucket.getFiles();
         const imageFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name));
-        res.json(imageFiles.map((file) => `https://storage.cloud.google.com/kandw_${bucket}/${file.name}`));
+        res.json(imageFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS[b]}/${file.name}`));
     } catch (error) {
         console.error('Error fetching image file names:', error);
     }
