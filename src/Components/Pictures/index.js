@@ -14,13 +14,13 @@ const domain = 'https://krebs-and-west-1adf2ab65cd8.herokuapp.com';
 
 const Pictures = () => {
     useEffect(() => {
-        fetch('/api/getimages', {
+        fetch(`/api/getimages?${new URLSearchParams(window.location.search).toString()}`, {
             domain,
             method: 'GET'
         })
             .then(response => response.json())
             .then((data) => {
-                setImages(data.map((id) => `https://storage.cloud.google.com/kandw_weddingpics/${id}`));
+                setImages(data);
             })
             .catch(error => {
                 console.error(error);
@@ -115,7 +115,7 @@ const Pictures = () => {
         <div>
             {/* Fancy Header */}
             <div className="header">
-                <h1>Modern Image Gallery</h1>
+                <h1>Wedding Photo Gallery</h1>
                 <p>Scroll to explore more stunning images</p>
             </div>
 
