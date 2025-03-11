@@ -1,3 +1,7 @@
+.Pictures_container {
+    
+}
+
 /* General Styles */
 body {
     margin: 0;
@@ -7,15 +11,17 @@ body {
     color: #333;
 }
 
+.Pictures_header-container {
+
+}
+
 /* Header Styles */
-.header {
-    background: #0d0d6f;
-    /* Updated header color */
+.Nav_sky-header {
+    position: sticky;
     color: white;
     /* White text for contrast */
     padding: 40px 20px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     /* Subtle shadow for depth */
 }
 
@@ -35,17 +41,18 @@ body {
 
 /* Image List Styles */
 .image-list-container {
-    padding: 20px;
+    padding: 15px;
     max-width: 1200px;
     margin: 0 auto;
-    background-color: white;
-    /* White background behind images */
+    background-color: black;
+    border-radius: 8px;
 }
 
 .image-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 16px;
+    margin: unset;
 }
 
 .image-list-item {
@@ -113,4 +120,13 @@ body {
 .close-button:hover {
     background-color: rgba(255, 255, 255, 1);
     /* Solid white on hover */
+}
+
+.Nav_sky-photos {
+    background-image: url('../../Assets/sky.png');
+    background-size: 100vh;
+    background-repeat: repeat-x;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
 }

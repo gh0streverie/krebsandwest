@@ -108,16 +108,42 @@ const Pictures = () => {
         };
     }, [startIndex, loading, windowSize, loadStep]);
 
+    const getHeader = () => {
+        const segment = window.location.search;
+
+        if (!segment) {
+            return (
+                <div className="Nav_sky-header">
+                    <h1>This is not the page you are looking for</h1>
+                </div>
+            );
+        } else if (segment == "?b=5e870529") {
+            return (
+                <div className="Nav_sky-header">
+                    <h1>Wedding Photo Gallery</h1>
+                    <p>Scroll to explore photos captured by wedding guests</p>
+                </div>
+            );
+        } else {
+            return (
+                <div className="Nav_sky-header">
+                    <h1>Scroll to explore photos captured by our photographer Brian Warren</h1>
+                    <p>Special thanks to Brian for taking these amazing pictures so that we can always</p>
+                    <p> look back on the moments that made our special day so incredible!</p>
+                </div>
+            );
+        }
+    }
+
     // Calculate the visible images based on the current window
     const visibleImages = images.slice(startIndex, startIndex + windowSize);
 
     return (
         <div>
+            <div className="Nav_sky-photos" />
             {/* Fancy Header */}
-            <div className="header">
-                <h1>Wedding Photo Gallery</h1>
-                <p>Scroll to explore more stunning images</p>
-            </div>
+
+            {getHeader()}
 
             {/* Top Loader for Scrolling Up */}
             {startIndex > 0 && (
