@@ -79,13 +79,13 @@ router.get('/getimages', async (req, res) => {
         const {b} = req.query;
         const bucket = storage.bucket(`kandw_${BUCKETS[b]}`);
         const [files] = await bucket.getFiles();
-        let imageFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name)).filter(str => !str.includes('_sm'));
+        let imageFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name)).filter((file) => !file.name.includes('_sm'));
         imageFiles = imageFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS[b]}/${file.name}`)
 
         if (b === "b2bf9a41") {
             const everyoneBucket = storage.bucket(`kandw_${BUCKETS["9fb6334c"]}`);
             const [files] = await everyoneBucket.getFiles();
-            const everyoneFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name)).filter(str => !str.includes('_sm'));
+            const everyoneFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name)).filter((file) => !file.name.includes('_sm'));
             everyoneFiles = everyoneFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS["9fb6334c"]}/${file.name}`)
 
             imageFiles = imageFiles.concat(files).sort();
