@@ -104,9 +104,19 @@ router.get('/getimages', async (req, res) => {
                 .map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS["9fb6334c"]}/${file.name}`);
 
             data = data.concat(everyoneFiles);
-        }
 
-        data = data.sort((a, b) => a.localeCompare(b))
+            data = data.sort((a, b) => {
+                const extractDSCNumber = (url) => {
+                    const match = url.match(/DSC\d+/);
+                    return match ? parseInt(match[0].replace('DSC', ''), 10) : 0;
+                };
+            
+                const dscA = extractDSCNumber(a);
+                const dscB = extractDSCNumber(b);
+            
+                return dscA - dscB;
+            });
+        }
 
         res.json(data);
     } catch (error) {
