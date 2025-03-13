@@ -116,6 +116,8 @@ router.get('/getimages', async (req, res) => {
             
                 return dscA - dscB;
             });
+            data.push[data[0]];
+            data.shift();
         }
 
         res.json(data);
