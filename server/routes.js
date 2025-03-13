@@ -76,19 +76,32 @@ router.post('/uploadimages', upload.array('images', 500), async (req, res) => {
 
 router.get('/getimages', async (req, res) => {
     try {
-        const data = [];
-        const {b} = req.query;
+        // Validate bucket exists
+        const { b } = req.query;
+        if (!BUCKETS[b]) {
+            return res.status(400).json({ error: 'Invalid bucket identifier' });
+        }
+
+        let data = [];
         const bucket = storage.bucket(`kandw_${BUCKETS[b]}`);
+        
+        // Get files from primary bucket
         let [files] = await bucket.getFiles();
-        let imageFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name));
-        imageFiles = imageFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS[b]}/${file.name}`).filter((file) => !file.name.includes('_sm'));
+        let imageFiles = files
+            .filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name))
+            .filter((file) => !file.name.includes('_sm'))
+            .map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS[b]}/${file.name}`);
+        
         data = data.concat(imageFiles);
 
+        // Additional bucket for specific condition
         if (b === "b2bf9a41") {
             const everyoneBucket = storage.bucket(`kandw_a5517c45`);
             let [files] = await everyoneBucket.getFiles();
-            let everyoneFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name));
-            everyoneFiles = everyoneFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS["9fb6334c"]}/${file.name}`).filter((file) => !file.name.includes('_sm'));
+            let everyoneFiles = files
+                .filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name))
+                .filter((file) => !file.name.includes('_sm'))
+                .map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS["9fb6334c"]}/${file.name}`);
 
             data = data.concat(everyoneFiles);
         }
@@ -96,6 +109,7 @@ router.get('/getimages', async (req, res) => {
         res.json(data.sort());
     } catch (error) {
         console.error('Error fetching image file names:', error);
+        res.status(500).json({ error: 'Failed to fetch images' });
     }
 });
 
