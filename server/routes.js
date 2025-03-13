@@ -79,7 +79,14 @@ router.get('/getimages', async (req, res) => {
         const {b} = req.query;
         const bucket = storage.bucket(`kandw_${BUCKETS[b]}`);
         const [files] = await bucket.getFiles();
-        const imageFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name));
+        let imageFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name));
+
+        if (b === "b2bf9a41") {
+            const everyoneBucket = storage.bucket(`kandw_${BUCKETS["9fb6334c"]}`);
+            const [files] = await bucket.getFiles();
+            imageFiles = imageFiles.concat(files).sort();
+        }
+
         res.json(imageFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS[b]}/${file.name}`));
     } catch (error) {
         console.error('Error fetching image file names:', error);

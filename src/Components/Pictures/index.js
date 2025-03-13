@@ -169,7 +169,7 @@ const Pictures = () => {
                     {visibleImages.map((image, index) => (
                         <ImageListItem key={startIndex + index} className="image-list-item">
                             <img
-                                src={`${image}${imagePostfix}`}
+                                src={`${image.replace(".jpg", `${imagePostfix}.jpg`)}`}
                                 alt={`preview-${startIndex + index}`}
                                 onClick={() => handleClickOpen(image)}
                                 loading="lazy" // Enable lazy loading for better performance
