@@ -28,6 +28,7 @@ const Pictures = () => {
     }, []);
     const [images, setImages] = useState([]);
 
+    const [imagePostfix, setImagePostfix] = useState("");
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
     const [startIndex, setStartIndex] = useState(0); // Start index of the visible window
@@ -77,6 +78,16 @@ const Pictures = () => {
         };
     }, [startIndex, loading, images.length, windowSize, loadStep]);
 
+    useEffect(() => {
+        const segment = window.location.search;
+
+        if (segment == "?b=5e870529") {
+            setImagePostfix("");
+        } else {
+            setImagePostfix("_sm");
+        }
+    }, window.location.search);
+
     // Load previous images when the user scrolls to the top
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -121,7 +132,7 @@ const Pictures = () => {
             return (
                 <div className="Nav_sky-header">
                     <h1>Wedding Photo Gallery</h1>
-                    <p>Scroll to explore photos captured by wedding guests</p>
+                    <p>Scroll to explore photos captured by our wedding guests</p>
                 </div>
             );
         } else {
@@ -158,7 +169,7 @@ const Pictures = () => {
                     {visibleImages.map((image, index) => (
                         <ImageListItem key={startIndex + index} className="image-list-item">
                             <img
-                                src={image}
+                                src={`${image}${imagePostfix}`}
                                 alt={`preview-${startIndex + index}`}
                                 onClick={() => handleClickOpen(image)}
                                 loading="lazy" // Enable lazy loading for better performance
