@@ -76,22 +76,24 @@ router.post('/uploadimages', upload.array('images', 500), async (req, res) => {
 
 router.get('/getimages', async (req, res) => {
     try {
+        const data = [];
         const {b} = req.query;
         const bucket = storage.bucket(`kandw_${BUCKETS[b]}`);
-        const [files] = await bucket.getFiles();
-        let imageFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name)).filter((file) => !file.name.includes('_sm'));
-        imageFiles = imageFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS[b]}/${file.name}`)
+        let [files] = await bucket.getFiles();
+        let imageFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name));
+        imageFiles = imageFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS[b]}/${file.name}`).filter((file) => !file.name.includes('_sm'));
+        data = data.concat(imageFiles);
 
         if (b === "b2bf9a41") {
-            const everyoneBucket = storage.bucket(`kandw_${BUCKETS["9fb6334c"]}`);
-            const [files] = await everyoneBucket.getFiles();
-            const everyoneFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name)).filter((file) => !file.name.includes('_sm'));
-            everyoneFiles = everyoneFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS["9fb6334c"]}/${file.name}`)
+            const everyoneBucket = storage.bucket(`kandw_a5517c45`);
+            let [files] = await everyoneBucket.getFiles();
+            let everyoneFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name));
+            everyoneFiles = everyoneFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS["9fb6334c"]}/${file.name}`).filter((file) => !file.name.includes('_sm'));
 
-            imageFiles = imageFiles.concat(files).sort();
+            data = data.concat(everyoneFiles);
         }
 
-        res.json(imageFiles);
+        res.json(data.sort());
     } catch (error) {
         console.error('Error fetching image file names:', error);
     }
