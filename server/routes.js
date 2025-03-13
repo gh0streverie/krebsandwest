@@ -79,15 +79,19 @@ router.get('/getimages', async (req, res) => {
         const {b} = req.query;
         const bucket = storage.bucket(`kandw_${BUCKETS[b]}`);
         const [files] = await bucket.getFiles();
-        let imageFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name));
+        let imageFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name)).filter(str => !str.includes('_sm'));
+        imageFiles = imageFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS[b]}/${file.name}`)
 
         if (b === "b2bf9a41") {
             const everyoneBucket = storage.bucket(`kandw_${BUCKETS["9fb6334c"]}`);
-            const [files] = await bucket.getFiles();
+            const [files] = await everyoneBucket.getFiles();
+            const everyoneFiles = files.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name)).filter(str => !str.includes('_sm'));
+            everyoneFiles = everyoneFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS["9fb6334c"]}/${file.name}`)
+
             imageFiles = imageFiles.concat(files).sort();
         }
 
-        res.json(imageFiles.map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS[b]}/${file.name}`));
+        res.json(imageFiles);
     } catch (error) {
         console.error('Error fetching image file names:', error);
     }
