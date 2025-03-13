@@ -106,7 +106,9 @@ router.get('/getimages', async (req, res) => {
             data = data.concat(everyoneFiles);
         }
 
-        res.json(data.sort());
+        data = data.sort((a, b) => a.localeCompare(b))
+
+        res.json(data);
     } catch (error) {
         console.error('Error fetching image file names:', error);
         res.status(500).json({ error: 'Failed to fetch images' });
