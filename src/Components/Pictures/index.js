@@ -28,7 +28,6 @@ const Pictures = () => {
     }, []);
     const [images, setImages] = useState([]);
 
-    const [imagePostfix, setImagePostfix] = useState("");
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
     const [startIndex, setStartIndex] = useState(0); // Start index of the visible window
@@ -77,16 +76,6 @@ const Pictures = () => {
             }
         };
     }, [startIndex, loading, images.length, windowSize, loadStep]);
-
-    useEffect(() => {
-        const segment = window.location.search;
-
-        if (segment == "?b=5e870529") {
-            setImagePostfix("");
-        } else {
-            setImagePostfix("_sm");
-        }
-    }, window.location.search);
 
     // Load previous images when the user scrolls to the top
     useEffect(() => {
@@ -169,7 +158,7 @@ const Pictures = () => {
                     {visibleImages.map((image, index) => (
                         <ImageListItem key={startIndex + index} className="image-list-item">
                             <img
-                                src={`${image.replace(".jpg", `${imagePostfix}.jpg`)}`}
+                                src={`${image.replace(".jpg", "_sm.jpg")}`}
                                 alt={`preview-${startIndex + index}`}
                                 onClick={() => handleClickOpen(image)}
                                 loading="lazy" // Enable lazy loading for better performance
