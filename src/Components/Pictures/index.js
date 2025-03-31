@@ -120,16 +120,16 @@ const Pictures = () => {
         } else if (segment == "?b=5e870529") {
             return (
                 <div className="Nav_sky-header">
-                    <h1>Wedding Photo Gallery</h1>
-                    <p>Scroll to explore photos captured by our wedding guests</p>
+                    <h1>Krebs and West Wedding Album</h1>
+                    <p>Photos captured by our guests</p>
                 </div>
             );
         } else {
             return (
                 <div className="Nav_sky-header">
-                    <h1>Scroll to explore photos captured by our photographer Brian Warren</h1>
-                    <p>Special thanks to Brian for taking these amazing pictures so that we can always</p>
-                    <p> look back on the moments that made our special day so incredible!</p>
+                    <h1>Krebs and West Wedding Album</h1>
+                    <h2>Photography by Brian Warren</h2>
+                    <p>Special thanks to Brian for capturing our special day so incredibly</p>
                 </div>
             );
         }
