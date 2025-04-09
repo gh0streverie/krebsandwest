@@ -90,7 +90,7 @@ router.get('/getimages', async (req, res) => {
         let imageFiles = files
             .filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name))
             .filter((file) => !file.name.includes('_sm'))
-            .map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS[b]}/${file.name}`);
+            .map((file) => `https://storage.googleapis.com/kandw_${BUCKETS[b]}/${file.name}`);
         
         data = data.concat(imageFiles);
 
@@ -101,7 +101,7 @@ router.get('/getimages', async (req, res) => {
             let everyoneFiles = files
                 .filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name))
                 .filter((file) => !file.name.includes('_sm'))
-                .map((file) => `https://storage.cloud.google.com/kandw_${BUCKETS["9fb6334c"]}/${file.name}`);
+                .map((file) => `https://storage.googleapis.com/kandw_${BUCKETS["9fb6334c"]}/${file.name}`);
 
             data = data.concat(everyoneFiles);
 
